@@ -45,6 +45,7 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values);
     await new Promise(resolve => setTimeout(resolve, 1000));
     setIsSubmitted(true);
     form.reset();

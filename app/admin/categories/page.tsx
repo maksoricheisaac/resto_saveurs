@@ -26,7 +26,7 @@ export default function AdminCategories() {
     defaultValues: { name: '', description: '' },
   });
 
-  function onSubmit(values) {
+  function onSubmit(values: any) {
     if (editing) {
       setCategories(cats => cats.map(cat => cat.id === editing ? { ...cat, ...values } : cat));
       setEditing(null);
@@ -36,12 +36,12 @@ export default function AdminCategories() {
     form.reset();
   }
 
-  function handleEdit(cat) {
+  function handleEdit(cat: any) {
     setEditing(cat.id);
     form.reset({ name: cat.name, description: cat.description });
   }
 
-  function handleDelete(id) {
+  function handleDelete(id: number) {
     setCategories(cats => cats.filter(cat => cat.id !== id));
     if (editing === id) setEditing(null);
     form.reset();

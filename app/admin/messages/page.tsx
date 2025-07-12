@@ -11,9 +11,9 @@ const mockMessages = [
 
 export default function AdminMessages() {
   const [messages, setMessages] = useState(mockMessages);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<number | null>(null);
 
-  function handleDelete(id) {
+  function handleDelete(id: number) {
     setMessages(msgs => msgs.filter(m => m.id !== id));
     if (selected === id) setSelected(null);
   }

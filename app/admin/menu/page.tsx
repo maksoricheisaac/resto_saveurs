@@ -24,33 +24,41 @@ const menuSchema = z.object({
 });
 
 export default function AdminMenus() {
-  const [menus, setMenus] = useState([
+  type Menu = {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    image: string;
+    category: string;
+  };
+  const [menus, setMenus] = useState<Menu[]>([
     { id: 1, name: 'Poulet Moambe', description: 'Plat traditionnel congolais', price: 5000, image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg', category: '1' },
     { id: 2, name: 'Saka Saka', description: 'Feuilles de manioc', price: 3500, image: 'https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg', category: '2' },
   ]);
-  const [editing, setEditing] = useState(null);
+  const [editing, setEditing] = useState<number | null>(null);
 
   const form = useForm({
     resolver: zodResolver(menuSchema),
     defaultValues: { name: '', description: '', price: '', image: '', category: '' },
   });
 
-  function onSubmit(values) {
+  function onSubmit(values: z.infer<typeof menuSchema>) {
     if (editing) {
-      setMenus(items => items.map(item => item.id === editing ? { ...item, ...values } : item));
+      setMenus(items => items.map(item => item.id === editing ? { ...item, ...values, price: Number(values.price) } : item));
       setEditing(null);
     } else {
-      setMenus(items => [...items, { id: Date.now(), ...values }]);
+      setMenus(items => [...items, { id: Date.now(), ...values, price: Number(values.price) }]);
     }
     form.reset();
   }
 
-  function handleEdit(item) {
+  function handleEdit(item: Menu) {
     setEditing(item.id);
     form.reset({ ...item });
   }
 
-  function handleDelete(id) {
+  function handleDelete(id: number) {
     setMenus(items => items.filter(item => item.id !== id));
     if (editing === id) setEditing(null);
     form.reset();
@@ -97,7 +105,12 @@ export default function AdminMenus() {
                   <FormItem>
                     <FormLabel>Prix (FCFA)</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Prix" {...field} />
+                      <Input
+                        type="number"
+                        placeholder="Prix"
+                        {...field}
+                        value={typeof field.value === 'number' || typeof field.value === 'string' ? field.value : ''}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
