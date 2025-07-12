@@ -19,24 +19,25 @@ export default function AdminCategories() {
     { id: 2, name: 'Plats principaux', description: 'Les plats principaux du menu' },
     { id: 3, name: 'Desserts', description: 'Pour finir en douceur' },
   ]);
-  const [editing, setEditing] = useState(null);
+  const [editing, setEditing] = useState<number | null>(null);
 
   const form = useForm({
     resolver: zodResolver(categorySchema),
     defaultValues: { name: '', description: '' },
   });
 
-  function onSubmit(values: any) {
+  function onSubmit(values: z.infer<typeof categorySchema>) {
     if (editing) {
       setCategories(cats => cats.map(cat => cat.id === editing ? { ...cat, ...values } : cat));
       setEditing(null);
     } else {
-      setCategories(cats => [...cats, { id: Date.now(), ...values }]);
+      setCategories(cats => [...cats, { id: Date.now(), ...values, description: values.description ?? '' }]);
     }
     form.reset();
   }
 
-  function handleEdit(cat: any) {
+  type Category = { id: number; name: string; description: string };
+  function handleEdit(cat: Category) {
     setEditing(cat.id);
     form.reset({ name: cat.name, description: cat.description });
   }
