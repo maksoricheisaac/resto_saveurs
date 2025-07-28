@@ -1,62 +1,107 @@
-import { RiArrowRightUpLine } from "@remixicon/react";
-import { cn } from "@/lib/utils";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { LucideIcon } from 'lucide-react';
 
-interface StatsCardProps {
+interface StatCardProps {
   title: string;
-  value: string;
-  change: {
-    value: string;
-    trend: "up" | "down";
+  value: string | number;
+  description: string;
+  icon: LucideIcon;
+  color: 'amber' | 'blue' | 'green' | 'purple' | 'rose' | 'cyan';
+  trend?: {
+    value: number;
+    isPositive: boolean;
   };
-  icon: React.ReactNode;
 }
 
-export function StatsCard({ title, value, change, icon }: StatsCardProps) {
-  const isPositive = change.trend === "up";
-  const trendColor = isPositive ? "text-emerald-500" : "text-red-500";
+const colorClasses = {
+  amber: {
+    bg: 'bg-gradient-to-br from-amber-50 to-orange-50',
+    icon: 'text-amber-600',
+    title: 'text-amber-700',
+    value: 'text-amber-800',
+    description: 'text-amber-600',
+  },
+  blue: {
+    bg: 'bg-gradient-to-br from-blue-50 to-indigo-50',
+    icon: 'text-blue-600',
+    title: 'text-blue-700',
+    value: 'text-blue-800',
+    description: 'text-blue-600',
+  },
+  green: {
+    bg: 'bg-gradient-to-br from-green-50 to-emerald-50',
+    icon: 'text-green-600',
+    title: 'text-green-700',
+    value: 'text-green-800',
+    description: 'text-green-600',
+  },
+  purple: {
+    bg: 'bg-gradient-to-br from-purple-50 to-violet-50',
+    icon: 'text-purple-600',
+    title: 'text-purple-700',
+    value: 'text-purple-800',
+    description: 'text-purple-600',
+  },
+  rose: {
+    bg: 'bg-gradient-to-br from-rose-50 to-pink-50',
+    icon: 'text-rose-600',
+    title: 'text-rose-700',
+    value: 'text-rose-800',
+    description: 'text-rose-600',
+  },
+  cyan: {
+    bg: 'bg-gradient-to-br from-cyan-50 to-teal-50',
+    icon: 'text-cyan-600',
+    title: 'text-cyan-700',
+    value: 'text-cyan-800',
+    description: 'text-cyan-600',
+  },
+};
+
+export function StatCard({ title, value, description, icon: Icon, color, trend }: StatCardProps) {
+  const colors = colorClasses[color];
 
   return (
-    <div className="relative p-4 lg:p-5 group before:absolute before:inset-y-8 before:right-0 before:w-px before:bg-gradient-to-b before:from-input/30 before:via-input before:to-input/30 last:before:hidden">
-      <div className="relative flex items-center gap-4">
-        <RiArrowRightUpLine
-          className="absolute right-0 top-0 opacity-0 group-has-[a:hover]:opacity-100 transition-opacity text-emerald-500"
-          size={20}
-          aria-hidden="true"
-        />
-        {/* Icon */}
-        <div className="max-[480px]:hidden size-10 shrink-0 rounded-full bg-emerald-600/25 border border-emerald-600/50 flex items-center justify-center text-emerald-500">
-          {icon}
+    <Card className={`group hover:shadow-lg transition-all duration-300 border-0 shadow-md ${colors.bg}`}>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className={`text-sm font-medium ${colors.title}`}>{title}</CardTitle>
+        <Icon className={`h-4 w-4 ${colors.icon} group-hover:scale-110 transition-transform`} />
+      </CardHeader>
+      <CardContent>
+        <div className={`text-2xl font-bold ${colors.value}`}>
+          {typeof value === 'number' ? value.toLocaleString() : value}
         </div>
-        {/* Content */}
-        <div>
-          <a
-            href="#"
-            className="font-medium tracking-widest text-xs uppercase text-muted-foreground/60 before:absolute before:inset-0"
-          >
-            {title}
-          </a>
-          <div className="text-2xl font-semibold mb-2">{value}</div>
-          <div className="text-xs text-muted-foreground/60">
-            <span className={cn("font-medium", trendColor)}>
-              {isPositive ? "↗" : "↘"} {change.value}
-            </span>{" "}
-            vs last week
+        <p className={`text-xs ${colors.description} mt-1`}>{description}</p>
+        {trend && (
+          <div className="flex items-center gap-1 mt-2">
+            <span className={`text-xs font-medium ${trend.isPositive ? 'text-green-600' : 'text-red-600'}`}>
+              {trend.isPositive ? '+' : ''}{trend.value}%
+            </span>
+            <span className="text-xs text-gray-500">vs mois dernier</span>
           </div>
-        </div>
-      </div>
-    </div>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 
 interface StatsGridProps {
-  stats: StatsCardProps[];
+  stats: StatCardProps[];
+  columns?: 1 | 2 | 3 | 4;
 }
 
-export function StatsGrid({ stats }: StatsGridProps) {
+export function StatsGrid({ stats, columns = 3 }: StatsGridProps) {
+  const gridCols = {
+    1: 'grid-cols-1',
+    2: 'grid-cols-1 md:grid-cols-2',
+    3: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
+    4: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4',
+  };
+
   return (
-    <div className="grid grid-cols-2 min-[1200px]:grid-cols-4 border border-border rounded-xl bg-gradient-to-br from-sidebar/60 to-sidebar">
-      {stats.map((stat) => (
-        <StatsCard key={stat.title} {...stat} />
+    <div className={`grid ${gridCols[columns]} gap-6`}>
+      {stats.map((stat, index) => (
+        <StatCard key={index} {...stat} />
       ))}
     </div>
   );

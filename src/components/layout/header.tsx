@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-gray-900 text-white py-2 px-4 text-sm">
+      <div className="bg-gray-900 text-white py-2 px-4 text-sm hidden md:block">
         <div className="container-custom flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
@@ -72,7 +72,7 @@ const Header = () => {
                 <span className="text-white font-bold text-lg">SC</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">Saveurs du Congo</h1>
+                <h1 className="text-xl font-bold text-gray-900">Resto Saveurs</h1>
                 <p className="text-sm text-gray-600">Restaurant Africain</p>
               </div>
             </Link>
@@ -99,12 +99,14 @@ const Header = () => {
 
             {/* CTA Button */}
             <div className="hidden lg:block">
-              <button 
-                onClick={handleWhatsAppClick}
-                className="btn-primary"
-              >
-                Réserver
-              </button>
+              <Link href="/reservation">  
+                <button 
+                  className="btn-primary"
+                >
+                  Réserver
+                </button>
+              </Link>
+              
             </div>
 
             {/* Mobile Menu Button */}

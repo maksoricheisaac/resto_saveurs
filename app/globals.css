@@ -170,6 +170,53 @@
   .scale-in {
     animation: scaleIn 0.6s ease-out forwards;
   }
+
+  /* Admin specific styles */
+  .admin-card {
+    @apply bg-white rounded-xl shadow-md border-0 hover:shadow-lg transition-all duration-300;
+  }
+
+  .admin-card-header {
+    @apply border-b border-gray-100 pb-4 mb-6;
+  }
+
+  .admin-input {
+    @apply border-gray-200 focus:border-amber-500 focus:ring-amber-500 transition-colors duration-200;
+  }
+
+  .admin-button-primary {
+    @apply bg-amber-600 hover:bg-amber-700 text-white font-medium transition-all duration-200;
+  }
+
+  .admin-button-secondary {
+    @apply border-gray-300 hover:bg-gray-50 text-gray-700 transition-all duration-200;
+  }
+
+  .admin-badge {
+    @apply text-xs font-medium px-2 py-1 rounded-full;
+  }
+
+  .admin-sidebar-item {
+    @apply transition-all duration-200 hover:bg-gradient-to-r hover:from-amber-50/50 hover:to-orange-50/50;
+  }
+
+  .admin-sidebar-item-active {
+    @apply bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 shadow-sm border border-amber-200/60;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 @keyframes fadeIn {

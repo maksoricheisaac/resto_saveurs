@@ -9,57 +9,68 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { signOut } from "@/lib/auth-client";
 
-import { RiSettingsLine, RiTeamLine, RiLogoutBoxLine } from "@remixicon/react";
+import { RiSettingsLine, RiLogoutBoxLine } from "@remixicon/react";
+import { useRouter } from "next/navigation";
 
-export default function UserDropdown() {
+type UserDropdownProps = {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+    role: string;
+  };
+};
+
+export default function UserDropdown({ user }: UserDropdownProps) {
+  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="h-auto p-0 hover:bg-transparent">
           <Avatar className="size-8">
             <AvatarImage
-              src="https://raw.githubusercontent.com/origin-space/origin-images/refs/heads/main/exp1/user_sam4wh.png"
+              src={user.image}
               width={32}
               height={32}
               alt="Profile image"
             />
-            <AvatarFallback>KK</AvatarFallback>
+            <AvatarFallback>{user.name.charAt(0).toUpperCase()}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="max-w-64" align="end">
         <DropdownMenuLabel className="flex min-w-0 flex-col">
           <span className="truncate text-sm font-medium text-foreground">
-            Keith Kennedy
+            {user.name}
           </span>
           <span className="truncate text-xs font-normal text-muted-foreground">
-            k.kennedy@originui.com
+            {user.email}
+          </span>
+          <span className="truncate text-xs font-normal text-muted-foreground italic">
+            {user.role}
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
+          <DropdownMenuItem onClick={() => router.push("/admin/settings")}>
             <RiSettingsLine
               size={16}
               className="opacity-60"
               aria-hidden="true"
             />
-            <span>Account settings</span>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <RiTeamLine size={16} className="opacity-60" aria-hidden="true" />
-            <span>Affiliate area</span>
+            <span>Paramètres</span>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={async () => await signOut()}>
           <RiLogoutBoxLine
             size={16}
             className="opacity-60"
             aria-hidden="true"
           />
-          <span>Sign out</span>
+          <span>Se déconnecter</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
