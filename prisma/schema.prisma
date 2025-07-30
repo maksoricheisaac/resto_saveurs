@@ -35,7 +35,36 @@ model MenuItem {
   categoryId     String
   category       Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
+  sideDishes MenuItemSideDish[]
+
   @@map("menu_items")
+}
+
+model SideDish {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  image       String?
+  isAvailable Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  menuItems MenuItemSideDish[]
+
+  @@map("side_dishes")
+}
+
+model MenuItemSideDish {
+  id          String   @id @default(cuid())
+  menuItemId  String
+  sideDishId  String
+  menuItem    MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Cascade)
+  sideDish    SideDish @relation(fields: [sideDishId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@unique([menuItemId, sideDishId])
+  @@map("menu_item_side_dishes")
 }
 
 model ContactMessage {

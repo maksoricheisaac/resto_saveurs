@@ -15,6 +15,7 @@ export type Menu = {
   allergens?: string;
   createdAt: Date;
   updatedAt: Date;
+  sideDishes?: MenuItemSideDish[];
 };
 
 export type MenuFormData = {
@@ -26,6 +27,7 @@ export type MenuFormData = {
   isDailySpecial: boolean;
   preparationTime?: string;
   allergens?: string;
+  sideDishIds?: string[];
 };
 
 export type Category = {
@@ -35,4 +37,30 @@ export type Category = {
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type SideDish = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  isAvailable: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type SideDishFormData = {
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+};
+
+export type MenuItemSideDish = {
+  id: string;
+  menuItemId: string;
+  sideDishId: string;
+  sideDish: SideDish;
+  createdAt: Date;
 }; 

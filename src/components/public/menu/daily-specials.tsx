@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { MenuItem } from '@/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface DailySpecialsProps {
   dailySpecials: MenuItem[];
@@ -41,13 +42,13 @@ export const DailySpecials = ({ dailySpecials }: DailySpecialsProps) => {
           <div className="flex items-center justify-center gap-2">
             <Clock className="w-4 h-4 text-amber-600" />
             <span className="text-amber-600 font-semibold text-sm">
-              Disponible aujourd'hui seulement
+              Disponible aujourd'hui
             </span>
           </div>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -61,7 +62,7 @@ export const DailySpecials = ({ dailySpecials }: DailySpecialsProps) => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
             >
-              <Card className="group bg-white shadow-md hover:shadow-lg transition-all duration-300 border-0 overflow-hidden">
+              <Card className="group bg-white shadow-md hover:shadow-lg transition-all duration-300 border-0 overflow-hidden h-120">
                 <div className="relative">
                   {item.image && (
                     <div className="aspect-[3/2] overflow-hidden">
@@ -91,14 +92,11 @@ export const DailySpecials = ({ dailySpecials }: DailySpecialsProps) => {
                   </div>
 
                   <p className="text-gray-600 mb-3 text-sm line-clamp-2">
-                    {item.description}
+                    {item.description.slice(0, 100)}...
                   </p>
 
                   <div className="flex items-center justify-between">
                     <div className="text-right">
-                      <div className="text-xs text-gray-500 line-through">
-                        {(item.price * 1.25).toLocaleString()} FCFA
-                      </div>
                       <div className="text-lg font-bold text-amber-600">
                         {item.price.toLocaleString()} FCFA
                       </div>
@@ -118,15 +116,13 @@ export const DailySpecials = ({ dailySpecials }: DailySpecialsProps) => {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          <p className="text-gray-600 mb-3 text-sm">
-            🕐 Ces plats spéciaux sont disponibles jusqu'à 22h00
-          </p>
           <Button 
             variant="outline" 
             size="sm"
             className="border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white"
+            asChild
           >
-            Voir tout le menu
+            <Link href="/menu">Voir tout le menu</Link>
           </Button>
         </motion.div>
       </div>

@@ -1,3 +1,4 @@
-export { MessageHeader } from './message-header';
 export { MessageList } from './message-list';
-export { MessageDetail } from './message-detail'; 
+export { MessageStats } from './message-stats'; 
+export { MessageDetail } from './message-detail';
+export { MessageHeader } from './message-header';

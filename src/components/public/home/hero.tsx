@@ -1,3 +1,4 @@
+'use client';
 import { restaurantInfo } from '@/data/restaurant';
 import { motion } from 'framer-motion';
 import { ArrowRight, ChefHat } from 'lucide-react';

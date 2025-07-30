@@ -142,6 +142,24 @@ exports.Prisma.MenuItemScalarFieldEnum = {
   categoryId: 'categoryId'
 };
 
+exports.Prisma.SideDishScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  price: 'price',
+  image: 'image',
+  isAvailable: 'isAvailable',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MenuItemSideDishScalarFieldEnum = {
+  id: 'id',
+  menuItemId: 'menuItemId',
+  sideDishId: 'sideDishId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.ContactMessageScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -236,6 +254,8 @@ exports.GalleryCategory = exports.$Enums.GalleryCategory = {
 exports.Prisma.ModelName = {
   Category: 'Category',
   MenuItem: 'MenuItem',
+  SideDish: 'SideDish',
+  MenuItemSideDish: 'MenuItemSideDish',
   ContactMessage: 'ContactMessage',
   GalleryImage: 'GalleryImage',
   User: 'User',

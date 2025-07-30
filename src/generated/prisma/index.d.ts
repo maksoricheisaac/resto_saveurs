@@ -24,6 +24,16 @@ export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
  */
 export type MenuItem = $Result.DefaultSelection<Prisma.$MenuItemPayload>
 /**
+ * Model SideDish
+ * 
+ */
+export type SideDish = $Result.DefaultSelection<Prisma.$SideDishPayload>
+/**
+ * Model MenuItemSideDish
+ * 
+ */
+export type MenuItemSideDish = $Result.DefaultSelection<Prisma.$MenuItemSideDishPayload>
+/**
  * Model ContactMessage
  * 
  */
@@ -216,6 +226,26 @@ export class PrismaClient<
     * ```
     */
   get menuItem(): Prisma.MenuItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.sideDish`: Exposes CRUD operations for the **SideDish** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SideDishes
+    * const sideDishes = await prisma.sideDish.findMany()
+    * ```
+    */
+  get sideDish(): Prisma.SideDishDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.menuItemSideDish`: Exposes CRUD operations for the **MenuItemSideDish** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MenuItemSideDishes
+    * const menuItemSideDishes = await prisma.menuItemSideDish.findMany()
+    * ```
+    */
+  get menuItemSideDish(): Prisma.MenuItemSideDishDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.contactMessage`: Exposes CRUD operations for the **ContactMessage** model.
@@ -718,6 +748,8 @@ export namespace Prisma {
   export const ModelName: {
     Category: 'Category',
     MenuItem: 'MenuItem',
+    SideDish: 'SideDish',
+    MenuItemSideDish: 'MenuItemSideDish',
     ContactMessage: 'ContactMessage',
     GalleryImage: 'GalleryImage',
     User: 'User',
@@ -742,7 +774,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "category" | "menuItem" | "contactMessage" | "galleryImage" | "user" | "session" | "account" | "verification"
+      modelProps: "category" | "menuItem" | "sideDish" | "menuItemSideDish" | "contactMessage" | "galleryImage" | "user" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -891,6 +923,154 @@ export namespace Prisma {
           count: {
             args: Prisma.MenuItemCountArgs<ExtArgs>
             result: $Utils.Optional<MenuItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      SideDish: {
+        payload: Prisma.$SideDishPayload<ExtArgs>
+        fields: Prisma.SideDishFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SideDishFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SideDishFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>
+          }
+          findFirst: {
+            args: Prisma.SideDishFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SideDishFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>
+          }
+          findMany: {
+            args: Prisma.SideDishFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>[]
+          }
+          create: {
+            args: Prisma.SideDishCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>
+          }
+          createMany: {
+            args: Prisma.SideDishCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SideDishCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>[]
+          }
+          delete: {
+            args: Prisma.SideDishDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>
+          }
+          update: {
+            args: Prisma.SideDishUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>
+          }
+          deleteMany: {
+            args: Prisma.SideDishDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SideDishUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SideDishUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>[]
+          }
+          upsert: {
+            args: Prisma.SideDishUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SideDishPayload>
+          }
+          aggregate: {
+            args: Prisma.SideDishAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSideDish>
+          }
+          groupBy: {
+            args: Prisma.SideDishGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SideDishGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SideDishCountArgs<ExtArgs>
+            result: $Utils.Optional<SideDishCountAggregateOutputType> | number
+          }
+        }
+      }
+      MenuItemSideDish: {
+        payload: Prisma.$MenuItemSideDishPayload<ExtArgs>
+        fields: Prisma.MenuItemSideDishFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MenuItemSideDishFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MenuItemSideDishFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>
+          }
+          findFirst: {
+            args: Prisma.MenuItemSideDishFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MenuItemSideDishFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>
+          }
+          findMany: {
+            args: Prisma.MenuItemSideDishFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>[]
+          }
+          create: {
+            args: Prisma.MenuItemSideDishCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>
+          }
+          createMany: {
+            args: Prisma.MenuItemSideDishCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MenuItemSideDishCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>[]
+          }
+          delete: {
+            args: Prisma.MenuItemSideDishDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>
+          }
+          update: {
+            args: Prisma.MenuItemSideDishUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>
+          }
+          deleteMany: {
+            args: Prisma.MenuItemSideDishDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MenuItemSideDishUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MenuItemSideDishUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>[]
+          }
+          upsert: {
+            args: Prisma.MenuItemSideDishUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuItemSideDishPayload>
+          }
+          aggregate: {
+            args: Prisma.MenuItemSideDishAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMenuItemSideDish>
+          }
+          groupBy: {
+            args: Prisma.MenuItemSideDishGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MenuItemSideDishGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MenuItemSideDishCountArgs<ExtArgs>
+            result: $Utils.Optional<MenuItemSideDishCountAggregateOutputType> | number
           }
         }
       }
@@ -1424,6 +1604,8 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     category?: CategoryOmit
     menuItem?: MenuItemOmit
+    sideDish?: SideDishOmit
+    menuItemSideDish?: MenuItemSideDishOmit
     contactMessage?: ContactMessageOmit
     galleryImage?: GalleryImageOmit
     user?: UserOmit
@@ -1547,6 +1729,68 @@ export namespace Prisma {
    */
   export type CategoryCountOutputTypeCountMenuItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MenuItemWhereInput
+  }
+
+
+  /**
+   * Count Type MenuItemCountOutputType
+   */
+
+  export type MenuItemCountOutputType = {
+    sideDishes: number
+  }
+
+  export type MenuItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sideDishes?: boolean | MenuItemCountOutputTypeCountSideDishesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MenuItemCountOutputType without action
+   */
+  export type MenuItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemCountOutputType
+     */
+    select?: MenuItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MenuItemCountOutputType without action
+   */
+  export type MenuItemCountOutputTypeCountSideDishesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuItemSideDishWhereInput
+  }
+
+
+  /**
+   * Count Type SideDishCountOutputType
+   */
+
+  export type SideDishCountOutputType = {
+    menuItems: number
+  }
+
+  export type SideDishCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menuItems?: boolean | SideDishCountOutputTypeCountMenuItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SideDishCountOutputType without action
+   */
+  export type SideDishCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDishCountOutputType
+     */
+    select?: SideDishCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SideDishCountOutputType without action
+   */
+  export type SideDishCountOutputTypeCountMenuItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuItemSideDishWhereInput
   }
 
 
@@ -2916,6 +3160,8 @@ export namespace Prisma {
     updatedAt?: boolean
     categoryId?: boolean
     category?: boolean | CategoryDefaultArgs<ExtArgs>
+    sideDishes?: boolean | MenuItem$sideDishesArgs<ExtArgs>
+    _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
 
   export type MenuItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2962,6 +3208,8 @@ export namespace Prisma {
   export type MenuItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "image" | "isAvailable" | "isDailySpecial" | "createdAt" | "updatedAt" | "categoryId", ExtArgs["result"]["menuItem"]>
   export type MenuItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
+    sideDishes?: boolean | MenuItem$sideDishesArgs<ExtArgs>
+    _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MenuItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | CategoryDefaultArgs<ExtArgs>
@@ -2974,6 +3222,7 @@ export namespace Prisma {
     name: "MenuItem"
     objects: {
       category: Prisma.$CategoryPayload<ExtArgs>
+      sideDishes: Prisma.$MenuItemSideDishPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3381,6 +3630,7 @@ export namespace Prisma {
   export interface Prisma__MenuItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sideDishes<T extends MenuItem$sideDishesArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$sideDishesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3816,6 +4066,30 @@ export namespace Prisma {
   }
 
   /**
+   * MenuItem.sideDishes
+   */
+  export type MenuItem$sideDishesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    where?: MenuItemSideDishWhereInput
+    orderBy?: MenuItemSideDishOrderByWithRelationInput | MenuItemSideDishOrderByWithRelationInput[]
+    cursor?: MenuItemSideDishWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MenuItemSideDishScalarFieldEnum | MenuItemSideDishScalarFieldEnum[]
+  }
+
+  /**
    * MenuItem without action
    */
   export type MenuItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3831,6 +4105,2202 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MenuItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SideDish
+   */
+
+  export type AggregateSideDish = {
+    _count: SideDishCountAggregateOutputType | null
+    _avg: SideDishAvgAggregateOutputType | null
+    _sum: SideDishSumAggregateOutputType | null
+    _min: SideDishMinAggregateOutputType | null
+    _max: SideDishMaxAggregateOutputType | null
+  }
+
+  export type SideDishAvgAggregateOutputType = {
+    price: number | null
+  }
+
+  export type SideDishSumAggregateOutputType = {
+    price: number | null
+  }
+
+  export type SideDishMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    price: number | null
+    image: string | null
+    isAvailable: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SideDishMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    price: number | null
+    image: string | null
+    isAvailable: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SideDishCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    price: number
+    image: number
+    isAvailable: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SideDishAvgAggregateInputType = {
+    price?: true
+  }
+
+  export type SideDishSumAggregateInputType = {
+    price?: true
+  }
+
+  export type SideDishMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    price?: true
+    image?: true
+    isAvailable?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SideDishMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    price?: true
+    image?: true
+    isAvailable?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SideDishCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    price?: true
+    image?: true
+    isAvailable?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SideDishAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SideDish to aggregate.
+     */
+    where?: SideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SideDishes to fetch.
+     */
+    orderBy?: SideDishOrderByWithRelationInput | SideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SideDishes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SideDishes
+    **/
+    _count?: true | SideDishCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SideDishAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SideDishSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SideDishMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SideDishMaxAggregateInputType
+  }
+
+  export type GetSideDishAggregateType<T extends SideDishAggregateArgs> = {
+        [P in keyof T & keyof AggregateSideDish]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSideDish[P]>
+      : GetScalarType<T[P], AggregateSideDish[P]>
+  }
+
+
+
+
+  export type SideDishGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SideDishWhereInput
+    orderBy?: SideDishOrderByWithAggregationInput | SideDishOrderByWithAggregationInput[]
+    by: SideDishScalarFieldEnum[] | SideDishScalarFieldEnum
+    having?: SideDishScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SideDishCountAggregateInputType | true
+    _avg?: SideDishAvgAggregateInputType
+    _sum?: SideDishSumAggregateInputType
+    _min?: SideDishMinAggregateInputType
+    _max?: SideDishMaxAggregateInputType
+  }
+
+  export type SideDishGroupByOutputType = {
+    id: string
+    name: string
+    description: string
+    price: number
+    image: string | null
+    isAvailable: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: SideDishCountAggregateOutputType | null
+    _avg: SideDishAvgAggregateOutputType | null
+    _sum: SideDishSumAggregateOutputType | null
+    _min: SideDishMinAggregateOutputType | null
+    _max: SideDishMaxAggregateOutputType | null
+  }
+
+  type GetSideDishGroupByPayload<T extends SideDishGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SideDishGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SideDishGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SideDishGroupByOutputType[P]>
+            : GetScalarType<T[P], SideDishGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SideDishSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    price?: boolean
+    image?: boolean
+    isAvailable?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    menuItems?: boolean | SideDish$menuItemsArgs<ExtArgs>
+    _count?: boolean | SideDishCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sideDish"]>
+
+  export type SideDishSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    price?: boolean
+    image?: boolean
+    isAvailable?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["sideDish"]>
+
+  export type SideDishSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    price?: boolean
+    image?: boolean
+    isAvailable?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["sideDish"]>
+
+  export type SideDishSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    price?: boolean
+    image?: boolean
+    isAvailable?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SideDishOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "image" | "isAvailable" | "createdAt" | "updatedAt", ExtArgs["result"]["sideDish"]>
+  export type SideDishInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menuItems?: boolean | SideDish$menuItemsArgs<ExtArgs>
+    _count?: boolean | SideDishCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SideDishIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SideDishIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $SideDishPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SideDish"
+    objects: {
+      menuItems: Prisma.$MenuItemSideDishPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string
+      price: number
+      image: string | null
+      isAvailable: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["sideDish"]>
+    composites: {}
+  }
+
+  type SideDishGetPayload<S extends boolean | null | undefined | SideDishDefaultArgs> = $Result.GetResult<Prisma.$SideDishPayload, S>
+
+  type SideDishCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SideDishFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SideDishCountAggregateInputType | true
+    }
+
+  export interface SideDishDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SideDish'], meta: { name: 'SideDish' } }
+    /**
+     * Find zero or one SideDish that matches the filter.
+     * @param {SideDishFindUniqueArgs} args - Arguments to find a SideDish
+     * @example
+     * // Get one SideDish
+     * const sideDish = await prisma.sideDish.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SideDishFindUniqueArgs>(args: SelectSubset<T, SideDishFindUniqueArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SideDish that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SideDishFindUniqueOrThrowArgs} args - Arguments to find a SideDish
+     * @example
+     * // Get one SideDish
+     * const sideDish = await prisma.sideDish.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SideDishFindUniqueOrThrowArgs>(args: SelectSubset<T, SideDishFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SideDish that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SideDishFindFirstArgs} args - Arguments to find a SideDish
+     * @example
+     * // Get one SideDish
+     * const sideDish = await prisma.sideDish.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SideDishFindFirstArgs>(args?: SelectSubset<T, SideDishFindFirstArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SideDish that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SideDishFindFirstOrThrowArgs} args - Arguments to find a SideDish
+     * @example
+     * // Get one SideDish
+     * const sideDish = await prisma.sideDish.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SideDishFindFirstOrThrowArgs>(args?: SelectSubset<T, SideDishFindFirstOrThrowArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SideDishes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SideDishFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SideDishes
+     * const sideDishes = await prisma.sideDish.findMany()
+     * 
+     * // Get first 10 SideDishes
+     * const sideDishes = await prisma.sideDish.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sideDishWithIdOnly = await prisma.sideDish.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SideDishFindManyArgs>(args?: SelectSubset<T, SideDishFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SideDish.
+     * @param {SideDishCreateArgs} args - Arguments to create a SideDish.
+     * @example
+     * // Create one SideDish
+     * const SideDish = await prisma.sideDish.create({
+     *   data: {
+     *     // ... data to create a SideDish
+     *   }
+     * })
+     * 
+     */
+    create<T extends SideDishCreateArgs>(args: SelectSubset<T, SideDishCreateArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SideDishes.
+     * @param {SideDishCreateManyArgs} args - Arguments to create many SideDishes.
+     * @example
+     * // Create many SideDishes
+     * const sideDish = await prisma.sideDish.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SideDishCreateManyArgs>(args?: SelectSubset<T, SideDishCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SideDishes and returns the data saved in the database.
+     * @param {SideDishCreateManyAndReturnArgs} args - Arguments to create many SideDishes.
+     * @example
+     * // Create many SideDishes
+     * const sideDish = await prisma.sideDish.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SideDishes and only return the `id`
+     * const sideDishWithIdOnly = await prisma.sideDish.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SideDishCreateManyAndReturnArgs>(args?: SelectSubset<T, SideDishCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SideDish.
+     * @param {SideDishDeleteArgs} args - Arguments to delete one SideDish.
+     * @example
+     * // Delete one SideDish
+     * const SideDish = await prisma.sideDish.delete({
+     *   where: {
+     *     // ... filter to delete one SideDish
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SideDishDeleteArgs>(args: SelectSubset<T, SideDishDeleteArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SideDish.
+     * @param {SideDishUpdateArgs} args - Arguments to update one SideDish.
+     * @example
+     * // Update one SideDish
+     * const sideDish = await prisma.sideDish.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SideDishUpdateArgs>(args: SelectSubset<T, SideDishUpdateArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SideDishes.
+     * @param {SideDishDeleteManyArgs} args - Arguments to filter SideDishes to delete.
+     * @example
+     * // Delete a few SideDishes
+     * const { count } = await prisma.sideDish.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SideDishDeleteManyArgs>(args?: SelectSubset<T, SideDishDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SideDishes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SideDishUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SideDishes
+     * const sideDish = await prisma.sideDish.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SideDishUpdateManyArgs>(args: SelectSubset<T, SideDishUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SideDishes and returns the data updated in the database.
+     * @param {SideDishUpdateManyAndReturnArgs} args - Arguments to update many SideDishes.
+     * @example
+     * // Update many SideDishes
+     * const sideDish = await prisma.sideDish.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SideDishes and only return the `id`
+     * const sideDishWithIdOnly = await prisma.sideDish.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SideDishUpdateManyAndReturnArgs>(args: SelectSubset<T, SideDishUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SideDish.
+     * @param {SideDishUpsertArgs} args - Arguments to update or create a SideDish.
+     * @example
+     * // Update or create a SideDish
+     * const sideDish = await prisma.sideDish.upsert({
+     *   create: {
+     *     // ... data to create a SideDish
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SideDish we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SideDishUpsertArgs>(args: SelectSubset<T, SideDishUpsertArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SideDishes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SideDishCountArgs} args - Arguments to filter SideDishes to count.
+     * @example
+     * // Count the number of SideDishes
+     * const count = await prisma.sideDish.count({
+     *   where: {
+     *     // ... the filter for the SideDishes we want to count
+     *   }
+     * })
+    **/
+    count<T extends SideDishCountArgs>(
+      args?: Subset<T, SideDishCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SideDishCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SideDish.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SideDishAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SideDishAggregateArgs>(args: Subset<T, SideDishAggregateArgs>): Prisma.PrismaPromise<GetSideDishAggregateType<T>>
+
+    /**
+     * Group by SideDish.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SideDishGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SideDishGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SideDishGroupByArgs['orderBy'] }
+        : { orderBy?: SideDishGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SideDishGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSideDishGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SideDish model
+   */
+  readonly fields: SideDishFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SideDish.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SideDishClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    menuItems<T extends SideDish$menuItemsArgs<ExtArgs> = {}>(args?: Subset<T, SideDish$menuItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SideDish model
+   */
+  interface SideDishFieldRefs {
+    readonly id: FieldRef<"SideDish", 'String'>
+    readonly name: FieldRef<"SideDish", 'String'>
+    readonly description: FieldRef<"SideDish", 'String'>
+    readonly price: FieldRef<"SideDish", 'Float'>
+    readonly image: FieldRef<"SideDish", 'String'>
+    readonly isAvailable: FieldRef<"SideDish", 'Boolean'>
+    readonly createdAt: FieldRef<"SideDish", 'DateTime'>
+    readonly updatedAt: FieldRef<"SideDish", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SideDish findUnique
+   */
+  export type SideDishFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which SideDish to fetch.
+     */
+    where: SideDishWhereUniqueInput
+  }
+
+  /**
+   * SideDish findUniqueOrThrow
+   */
+  export type SideDishFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which SideDish to fetch.
+     */
+    where: SideDishWhereUniqueInput
+  }
+
+  /**
+   * SideDish findFirst
+   */
+  export type SideDishFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which SideDish to fetch.
+     */
+    where?: SideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SideDishes to fetch.
+     */
+    orderBy?: SideDishOrderByWithRelationInput | SideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SideDishes.
+     */
+    cursor?: SideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SideDishes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SideDishes.
+     */
+    distinct?: SideDishScalarFieldEnum | SideDishScalarFieldEnum[]
+  }
+
+  /**
+   * SideDish findFirstOrThrow
+   */
+  export type SideDishFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which SideDish to fetch.
+     */
+    where?: SideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SideDishes to fetch.
+     */
+    orderBy?: SideDishOrderByWithRelationInput | SideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SideDishes.
+     */
+    cursor?: SideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SideDishes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SideDishes.
+     */
+    distinct?: SideDishScalarFieldEnum | SideDishScalarFieldEnum[]
+  }
+
+  /**
+   * SideDish findMany
+   */
+  export type SideDishFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which SideDishes to fetch.
+     */
+    where?: SideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SideDishes to fetch.
+     */
+    orderBy?: SideDishOrderByWithRelationInput | SideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SideDishes.
+     */
+    cursor?: SideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SideDishes.
+     */
+    skip?: number
+    distinct?: SideDishScalarFieldEnum | SideDishScalarFieldEnum[]
+  }
+
+  /**
+   * SideDish create
+   */
+  export type SideDishCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SideDish.
+     */
+    data: XOR<SideDishCreateInput, SideDishUncheckedCreateInput>
+  }
+
+  /**
+   * SideDish createMany
+   */
+  export type SideDishCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SideDishes.
+     */
+    data: SideDishCreateManyInput | SideDishCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SideDish createManyAndReturn
+   */
+  export type SideDishCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * The data used to create many SideDishes.
+     */
+    data: SideDishCreateManyInput | SideDishCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SideDish update
+   */
+  export type SideDishUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SideDish.
+     */
+    data: XOR<SideDishUpdateInput, SideDishUncheckedUpdateInput>
+    /**
+     * Choose, which SideDish to update.
+     */
+    where: SideDishWhereUniqueInput
+  }
+
+  /**
+   * SideDish updateMany
+   */
+  export type SideDishUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SideDishes.
+     */
+    data: XOR<SideDishUpdateManyMutationInput, SideDishUncheckedUpdateManyInput>
+    /**
+     * Filter which SideDishes to update
+     */
+    where?: SideDishWhereInput
+    /**
+     * Limit how many SideDishes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SideDish updateManyAndReturn
+   */
+  export type SideDishUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * The data used to update SideDishes.
+     */
+    data: XOR<SideDishUpdateManyMutationInput, SideDishUncheckedUpdateManyInput>
+    /**
+     * Filter which SideDishes to update
+     */
+    where?: SideDishWhereInput
+    /**
+     * Limit how many SideDishes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SideDish upsert
+   */
+  export type SideDishUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SideDish to update in case it exists.
+     */
+    where: SideDishWhereUniqueInput
+    /**
+     * In case the SideDish found by the `where` argument doesn't exist, create a new SideDish with this data.
+     */
+    create: XOR<SideDishCreateInput, SideDishUncheckedCreateInput>
+    /**
+     * In case the SideDish was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SideDishUpdateInput, SideDishUncheckedUpdateInput>
+  }
+
+  /**
+   * SideDish delete
+   */
+  export type SideDishDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+    /**
+     * Filter which SideDish to delete.
+     */
+    where: SideDishWhereUniqueInput
+  }
+
+  /**
+   * SideDish deleteMany
+   */
+  export type SideDishDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SideDishes to delete
+     */
+    where?: SideDishWhereInput
+    /**
+     * Limit how many SideDishes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SideDish.menuItems
+   */
+  export type SideDish$menuItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    where?: MenuItemSideDishWhereInput
+    orderBy?: MenuItemSideDishOrderByWithRelationInput | MenuItemSideDishOrderByWithRelationInput[]
+    cursor?: MenuItemSideDishWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MenuItemSideDishScalarFieldEnum | MenuItemSideDishScalarFieldEnum[]
+  }
+
+  /**
+   * SideDish without action
+   */
+  export type SideDishDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SideDish
+     */
+    select?: SideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SideDish
+     */
+    omit?: SideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SideDishInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MenuItemSideDish
+   */
+
+  export type AggregateMenuItemSideDish = {
+    _count: MenuItemSideDishCountAggregateOutputType | null
+    _min: MenuItemSideDishMinAggregateOutputType | null
+    _max: MenuItemSideDishMaxAggregateOutputType | null
+  }
+
+  export type MenuItemSideDishMinAggregateOutputType = {
+    id: string | null
+    menuItemId: string | null
+    sideDishId: string | null
+    createdAt: Date | null
+  }
+
+  export type MenuItemSideDishMaxAggregateOutputType = {
+    id: string | null
+    menuItemId: string | null
+    sideDishId: string | null
+    createdAt: Date | null
+  }
+
+  export type MenuItemSideDishCountAggregateOutputType = {
+    id: number
+    menuItemId: number
+    sideDishId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type MenuItemSideDishMinAggregateInputType = {
+    id?: true
+    menuItemId?: true
+    sideDishId?: true
+    createdAt?: true
+  }
+
+  export type MenuItemSideDishMaxAggregateInputType = {
+    id?: true
+    menuItemId?: true
+    sideDishId?: true
+    createdAt?: true
+  }
+
+  export type MenuItemSideDishCountAggregateInputType = {
+    id?: true
+    menuItemId?: true
+    sideDishId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type MenuItemSideDishAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MenuItemSideDish to aggregate.
+     */
+    where?: MenuItemSideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuItemSideDishes to fetch.
+     */
+    orderBy?: MenuItemSideDishOrderByWithRelationInput | MenuItemSideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MenuItemSideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuItemSideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuItemSideDishes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MenuItemSideDishes
+    **/
+    _count?: true | MenuItemSideDishCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MenuItemSideDishMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MenuItemSideDishMaxAggregateInputType
+  }
+
+  export type GetMenuItemSideDishAggregateType<T extends MenuItemSideDishAggregateArgs> = {
+        [P in keyof T & keyof AggregateMenuItemSideDish]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMenuItemSideDish[P]>
+      : GetScalarType<T[P], AggregateMenuItemSideDish[P]>
+  }
+
+
+
+
+  export type MenuItemSideDishGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuItemSideDishWhereInput
+    orderBy?: MenuItemSideDishOrderByWithAggregationInput | MenuItemSideDishOrderByWithAggregationInput[]
+    by: MenuItemSideDishScalarFieldEnum[] | MenuItemSideDishScalarFieldEnum
+    having?: MenuItemSideDishScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MenuItemSideDishCountAggregateInputType | true
+    _min?: MenuItemSideDishMinAggregateInputType
+    _max?: MenuItemSideDishMaxAggregateInputType
+  }
+
+  export type MenuItemSideDishGroupByOutputType = {
+    id: string
+    menuItemId: string
+    sideDishId: string
+    createdAt: Date
+    _count: MenuItemSideDishCountAggregateOutputType | null
+    _min: MenuItemSideDishMinAggregateOutputType | null
+    _max: MenuItemSideDishMaxAggregateOutputType | null
+  }
+
+  type GetMenuItemSideDishGroupByPayload<T extends MenuItemSideDishGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MenuItemSideDishGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MenuItemSideDishGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MenuItemSideDishGroupByOutputType[P]>
+            : GetScalarType<T[P], MenuItemSideDishGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MenuItemSideDishSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    menuItemId?: boolean
+    sideDishId?: boolean
+    createdAt?: boolean
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    sideDish?: boolean | SideDishDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["menuItemSideDish"]>
+
+  export type MenuItemSideDishSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    menuItemId?: boolean
+    sideDishId?: boolean
+    createdAt?: boolean
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    sideDish?: boolean | SideDishDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["menuItemSideDish"]>
+
+  export type MenuItemSideDishSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    menuItemId?: boolean
+    sideDishId?: boolean
+    createdAt?: boolean
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    sideDish?: boolean | SideDishDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["menuItemSideDish"]>
+
+  export type MenuItemSideDishSelectScalar = {
+    id?: boolean
+    menuItemId?: boolean
+    sideDishId?: boolean
+    createdAt?: boolean
+  }
+
+  export type MenuItemSideDishOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "menuItemId" | "sideDishId" | "createdAt", ExtArgs["result"]["menuItemSideDish"]>
+  export type MenuItemSideDishInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    sideDish?: boolean | SideDishDefaultArgs<ExtArgs>
+  }
+  export type MenuItemSideDishIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    sideDish?: boolean | SideDishDefaultArgs<ExtArgs>
+  }
+  export type MenuItemSideDishIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menuItem?: boolean | MenuItemDefaultArgs<ExtArgs>
+    sideDish?: boolean | SideDishDefaultArgs<ExtArgs>
+  }
+
+  export type $MenuItemSideDishPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MenuItemSideDish"
+    objects: {
+      menuItem: Prisma.$MenuItemPayload<ExtArgs>
+      sideDish: Prisma.$SideDishPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      menuItemId: string
+      sideDishId: string
+      createdAt: Date
+    }, ExtArgs["result"]["menuItemSideDish"]>
+    composites: {}
+  }
+
+  type MenuItemSideDishGetPayload<S extends boolean | null | undefined | MenuItemSideDishDefaultArgs> = $Result.GetResult<Prisma.$MenuItemSideDishPayload, S>
+
+  type MenuItemSideDishCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MenuItemSideDishFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MenuItemSideDishCountAggregateInputType | true
+    }
+
+  export interface MenuItemSideDishDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MenuItemSideDish'], meta: { name: 'MenuItemSideDish' } }
+    /**
+     * Find zero or one MenuItemSideDish that matches the filter.
+     * @param {MenuItemSideDishFindUniqueArgs} args - Arguments to find a MenuItemSideDish
+     * @example
+     * // Get one MenuItemSideDish
+     * const menuItemSideDish = await prisma.menuItemSideDish.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MenuItemSideDishFindUniqueArgs>(args: SelectSubset<T, MenuItemSideDishFindUniqueArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MenuItemSideDish that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MenuItemSideDishFindUniqueOrThrowArgs} args - Arguments to find a MenuItemSideDish
+     * @example
+     * // Get one MenuItemSideDish
+     * const menuItemSideDish = await prisma.menuItemSideDish.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MenuItemSideDishFindUniqueOrThrowArgs>(args: SelectSubset<T, MenuItemSideDishFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MenuItemSideDish that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuItemSideDishFindFirstArgs} args - Arguments to find a MenuItemSideDish
+     * @example
+     * // Get one MenuItemSideDish
+     * const menuItemSideDish = await prisma.menuItemSideDish.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MenuItemSideDishFindFirstArgs>(args?: SelectSubset<T, MenuItemSideDishFindFirstArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MenuItemSideDish that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuItemSideDishFindFirstOrThrowArgs} args - Arguments to find a MenuItemSideDish
+     * @example
+     * // Get one MenuItemSideDish
+     * const menuItemSideDish = await prisma.menuItemSideDish.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MenuItemSideDishFindFirstOrThrowArgs>(args?: SelectSubset<T, MenuItemSideDishFindFirstOrThrowArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MenuItemSideDishes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuItemSideDishFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MenuItemSideDishes
+     * const menuItemSideDishes = await prisma.menuItemSideDish.findMany()
+     * 
+     * // Get first 10 MenuItemSideDishes
+     * const menuItemSideDishes = await prisma.menuItemSideDish.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const menuItemSideDishWithIdOnly = await prisma.menuItemSideDish.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MenuItemSideDishFindManyArgs>(args?: SelectSubset<T, MenuItemSideDishFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MenuItemSideDish.
+     * @param {MenuItemSideDishCreateArgs} args - Arguments to create a MenuItemSideDish.
+     * @example
+     * // Create one MenuItemSideDish
+     * const MenuItemSideDish = await prisma.menuItemSideDish.create({
+     *   data: {
+     *     // ... data to create a MenuItemSideDish
+     *   }
+     * })
+     * 
+     */
+    create<T extends MenuItemSideDishCreateArgs>(args: SelectSubset<T, MenuItemSideDishCreateArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MenuItemSideDishes.
+     * @param {MenuItemSideDishCreateManyArgs} args - Arguments to create many MenuItemSideDishes.
+     * @example
+     * // Create many MenuItemSideDishes
+     * const menuItemSideDish = await prisma.menuItemSideDish.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MenuItemSideDishCreateManyArgs>(args?: SelectSubset<T, MenuItemSideDishCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MenuItemSideDishes and returns the data saved in the database.
+     * @param {MenuItemSideDishCreateManyAndReturnArgs} args - Arguments to create many MenuItemSideDishes.
+     * @example
+     * // Create many MenuItemSideDishes
+     * const menuItemSideDish = await prisma.menuItemSideDish.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MenuItemSideDishes and only return the `id`
+     * const menuItemSideDishWithIdOnly = await prisma.menuItemSideDish.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MenuItemSideDishCreateManyAndReturnArgs>(args?: SelectSubset<T, MenuItemSideDishCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MenuItemSideDish.
+     * @param {MenuItemSideDishDeleteArgs} args - Arguments to delete one MenuItemSideDish.
+     * @example
+     * // Delete one MenuItemSideDish
+     * const MenuItemSideDish = await prisma.menuItemSideDish.delete({
+     *   where: {
+     *     // ... filter to delete one MenuItemSideDish
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MenuItemSideDishDeleteArgs>(args: SelectSubset<T, MenuItemSideDishDeleteArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MenuItemSideDish.
+     * @param {MenuItemSideDishUpdateArgs} args - Arguments to update one MenuItemSideDish.
+     * @example
+     * // Update one MenuItemSideDish
+     * const menuItemSideDish = await prisma.menuItemSideDish.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MenuItemSideDishUpdateArgs>(args: SelectSubset<T, MenuItemSideDishUpdateArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MenuItemSideDishes.
+     * @param {MenuItemSideDishDeleteManyArgs} args - Arguments to filter MenuItemSideDishes to delete.
+     * @example
+     * // Delete a few MenuItemSideDishes
+     * const { count } = await prisma.menuItemSideDish.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MenuItemSideDishDeleteManyArgs>(args?: SelectSubset<T, MenuItemSideDishDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MenuItemSideDishes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuItemSideDishUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MenuItemSideDishes
+     * const menuItemSideDish = await prisma.menuItemSideDish.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MenuItemSideDishUpdateManyArgs>(args: SelectSubset<T, MenuItemSideDishUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MenuItemSideDishes and returns the data updated in the database.
+     * @param {MenuItemSideDishUpdateManyAndReturnArgs} args - Arguments to update many MenuItemSideDishes.
+     * @example
+     * // Update many MenuItemSideDishes
+     * const menuItemSideDish = await prisma.menuItemSideDish.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MenuItemSideDishes and only return the `id`
+     * const menuItemSideDishWithIdOnly = await prisma.menuItemSideDish.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MenuItemSideDishUpdateManyAndReturnArgs>(args: SelectSubset<T, MenuItemSideDishUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MenuItemSideDish.
+     * @param {MenuItemSideDishUpsertArgs} args - Arguments to update or create a MenuItemSideDish.
+     * @example
+     * // Update or create a MenuItemSideDish
+     * const menuItemSideDish = await prisma.menuItemSideDish.upsert({
+     *   create: {
+     *     // ... data to create a MenuItemSideDish
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MenuItemSideDish we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MenuItemSideDishUpsertArgs>(args: SelectSubset<T, MenuItemSideDishUpsertArgs<ExtArgs>>): Prisma__MenuItemSideDishClient<$Result.GetResult<Prisma.$MenuItemSideDishPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MenuItemSideDishes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuItemSideDishCountArgs} args - Arguments to filter MenuItemSideDishes to count.
+     * @example
+     * // Count the number of MenuItemSideDishes
+     * const count = await prisma.menuItemSideDish.count({
+     *   where: {
+     *     // ... the filter for the MenuItemSideDishes we want to count
+     *   }
+     * })
+    **/
+    count<T extends MenuItemSideDishCountArgs>(
+      args?: Subset<T, MenuItemSideDishCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MenuItemSideDishCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MenuItemSideDish.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuItemSideDishAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MenuItemSideDishAggregateArgs>(args: Subset<T, MenuItemSideDishAggregateArgs>): Prisma.PrismaPromise<GetMenuItemSideDishAggregateType<T>>
+
+    /**
+     * Group by MenuItemSideDish.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuItemSideDishGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MenuItemSideDishGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MenuItemSideDishGroupByArgs['orderBy'] }
+        : { orderBy?: MenuItemSideDishGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MenuItemSideDishGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMenuItemSideDishGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MenuItemSideDish model
+   */
+  readonly fields: MenuItemSideDishFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MenuItemSideDish.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MenuItemSideDishClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    menuItem<T extends MenuItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuItemDefaultArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sideDish<T extends SideDishDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SideDishDefaultArgs<ExtArgs>>): Prisma__SideDishClient<$Result.GetResult<Prisma.$SideDishPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MenuItemSideDish model
+   */
+  interface MenuItemSideDishFieldRefs {
+    readonly id: FieldRef<"MenuItemSideDish", 'String'>
+    readonly menuItemId: FieldRef<"MenuItemSideDish", 'String'>
+    readonly sideDishId: FieldRef<"MenuItemSideDish", 'String'>
+    readonly createdAt: FieldRef<"MenuItemSideDish", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MenuItemSideDish findUnique
+   */
+  export type MenuItemSideDishFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuItemSideDish to fetch.
+     */
+    where: MenuItemSideDishWhereUniqueInput
+  }
+
+  /**
+   * MenuItemSideDish findUniqueOrThrow
+   */
+  export type MenuItemSideDishFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuItemSideDish to fetch.
+     */
+    where: MenuItemSideDishWhereUniqueInput
+  }
+
+  /**
+   * MenuItemSideDish findFirst
+   */
+  export type MenuItemSideDishFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuItemSideDish to fetch.
+     */
+    where?: MenuItemSideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuItemSideDishes to fetch.
+     */
+    orderBy?: MenuItemSideDishOrderByWithRelationInput | MenuItemSideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MenuItemSideDishes.
+     */
+    cursor?: MenuItemSideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuItemSideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuItemSideDishes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MenuItemSideDishes.
+     */
+    distinct?: MenuItemSideDishScalarFieldEnum | MenuItemSideDishScalarFieldEnum[]
+  }
+
+  /**
+   * MenuItemSideDish findFirstOrThrow
+   */
+  export type MenuItemSideDishFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuItemSideDish to fetch.
+     */
+    where?: MenuItemSideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuItemSideDishes to fetch.
+     */
+    orderBy?: MenuItemSideDishOrderByWithRelationInput | MenuItemSideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MenuItemSideDishes.
+     */
+    cursor?: MenuItemSideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuItemSideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuItemSideDishes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MenuItemSideDishes.
+     */
+    distinct?: MenuItemSideDishScalarFieldEnum | MenuItemSideDishScalarFieldEnum[]
+  }
+
+  /**
+   * MenuItemSideDish findMany
+   */
+  export type MenuItemSideDishFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuItemSideDishes to fetch.
+     */
+    where?: MenuItemSideDishWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuItemSideDishes to fetch.
+     */
+    orderBy?: MenuItemSideDishOrderByWithRelationInput | MenuItemSideDishOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MenuItemSideDishes.
+     */
+    cursor?: MenuItemSideDishWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuItemSideDishes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuItemSideDishes.
+     */
+    skip?: number
+    distinct?: MenuItemSideDishScalarFieldEnum | MenuItemSideDishScalarFieldEnum[]
+  }
+
+  /**
+   * MenuItemSideDish create
+   */
+  export type MenuItemSideDishCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MenuItemSideDish.
+     */
+    data: XOR<MenuItemSideDishCreateInput, MenuItemSideDishUncheckedCreateInput>
+  }
+
+  /**
+   * MenuItemSideDish createMany
+   */
+  export type MenuItemSideDishCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MenuItemSideDishes.
+     */
+    data: MenuItemSideDishCreateManyInput | MenuItemSideDishCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MenuItemSideDish createManyAndReturn
+   */
+  export type MenuItemSideDishCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * The data used to create many MenuItemSideDishes.
+     */
+    data: MenuItemSideDishCreateManyInput | MenuItemSideDishCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MenuItemSideDish update
+   */
+  export type MenuItemSideDishUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MenuItemSideDish.
+     */
+    data: XOR<MenuItemSideDishUpdateInput, MenuItemSideDishUncheckedUpdateInput>
+    /**
+     * Choose, which MenuItemSideDish to update.
+     */
+    where: MenuItemSideDishWhereUniqueInput
+  }
+
+  /**
+   * MenuItemSideDish updateMany
+   */
+  export type MenuItemSideDishUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MenuItemSideDishes.
+     */
+    data: XOR<MenuItemSideDishUpdateManyMutationInput, MenuItemSideDishUncheckedUpdateManyInput>
+    /**
+     * Filter which MenuItemSideDishes to update
+     */
+    where?: MenuItemSideDishWhereInput
+    /**
+     * Limit how many MenuItemSideDishes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MenuItemSideDish updateManyAndReturn
+   */
+  export type MenuItemSideDishUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * The data used to update MenuItemSideDishes.
+     */
+    data: XOR<MenuItemSideDishUpdateManyMutationInput, MenuItemSideDishUncheckedUpdateManyInput>
+    /**
+     * Filter which MenuItemSideDishes to update
+     */
+    where?: MenuItemSideDishWhereInput
+    /**
+     * Limit how many MenuItemSideDishes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MenuItemSideDish upsert
+   */
+  export type MenuItemSideDishUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MenuItemSideDish to update in case it exists.
+     */
+    where: MenuItemSideDishWhereUniqueInput
+    /**
+     * In case the MenuItemSideDish found by the `where` argument doesn't exist, create a new MenuItemSideDish with this data.
+     */
+    create: XOR<MenuItemSideDishCreateInput, MenuItemSideDishUncheckedCreateInput>
+    /**
+     * In case the MenuItemSideDish was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MenuItemSideDishUpdateInput, MenuItemSideDishUncheckedUpdateInput>
+  }
+
+  /**
+   * MenuItemSideDish delete
+   */
+  export type MenuItemSideDishDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
+    /**
+     * Filter which MenuItemSideDish to delete.
+     */
+    where: MenuItemSideDishWhereUniqueInput
+  }
+
+  /**
+   * MenuItemSideDish deleteMany
+   */
+  export type MenuItemSideDishDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MenuItemSideDishes to delete
+     */
+    where?: MenuItemSideDishWhereInput
+    /**
+     * Limit how many MenuItemSideDishes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MenuItemSideDish without action
+   */
+  export type MenuItemSideDishDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuItemSideDish
+     */
+    select?: MenuItemSideDishSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuItemSideDish
+     */
+    omit?: MenuItemSideDishOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuItemSideDishInclude<ExtArgs> | null
   }
 
 
@@ -10374,6 +12844,30 @@ export namespace Prisma {
   export type MenuItemScalarFieldEnum = (typeof MenuItemScalarFieldEnum)[keyof typeof MenuItemScalarFieldEnum]
 
 
+  export const SideDishScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    price: 'price',
+    image: 'image',
+    isAvailable: 'isAvailable',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SideDishScalarFieldEnum = (typeof SideDishScalarFieldEnum)[keyof typeof SideDishScalarFieldEnum]
+
+
+  export const MenuItemSideDishScalarFieldEnum: {
+    id: 'id',
+    menuItemId: 'menuItemId',
+    sideDishId: 'sideDishId',
+    createdAt: 'createdAt'
+  };
+
+  export type MenuItemSideDishScalarFieldEnum = (typeof MenuItemSideDishScalarFieldEnum)[keyof typeof MenuItemSideDishScalarFieldEnum]
+
+
   export const ContactMessageScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -10647,6 +13141,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
     categoryId?: StringFilter<"MenuItem"> | string
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    sideDishes?: MenuItemSideDishListRelationFilter
   }
 
   export type MenuItemOrderByWithRelationInput = {
@@ -10661,6 +13156,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     categoryId?: SortOrder
     category?: CategoryOrderByWithRelationInput
+    sideDishes?: MenuItemSideDishOrderByRelationAggregateInput
   }
 
   export type MenuItemWhereUniqueInput = Prisma.AtLeast<{
@@ -10678,6 +13174,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"MenuItem"> | Date | string
     categoryId?: StringFilter<"MenuItem"> | string
     category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    sideDishes?: MenuItemSideDishListRelationFilter
   }, "id">
 
   export type MenuItemOrderByWithAggregationInput = {
@@ -10712,6 +13209,132 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"MenuItem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"MenuItem"> | Date | string
     categoryId?: StringWithAggregatesFilter<"MenuItem"> | string
+  }
+
+  export type SideDishWhereInput = {
+    AND?: SideDishWhereInput | SideDishWhereInput[]
+    OR?: SideDishWhereInput[]
+    NOT?: SideDishWhereInput | SideDishWhereInput[]
+    id?: StringFilter<"SideDish"> | string
+    name?: StringFilter<"SideDish"> | string
+    description?: StringFilter<"SideDish"> | string
+    price?: FloatFilter<"SideDish"> | number
+    image?: StringNullableFilter<"SideDish"> | string | null
+    isAvailable?: BoolFilter<"SideDish"> | boolean
+    createdAt?: DateTimeFilter<"SideDish"> | Date | string
+    updatedAt?: DateTimeFilter<"SideDish"> | Date | string
+    menuItems?: MenuItemSideDishListRelationFilter
+  }
+
+  export type SideDishOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    price?: SortOrder
+    image?: SortOrderInput | SortOrder
+    isAvailable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    menuItems?: MenuItemSideDishOrderByRelationAggregateInput
+  }
+
+  export type SideDishWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SideDishWhereInput | SideDishWhereInput[]
+    OR?: SideDishWhereInput[]
+    NOT?: SideDishWhereInput | SideDishWhereInput[]
+    name?: StringFilter<"SideDish"> | string
+    description?: StringFilter<"SideDish"> | string
+    price?: FloatFilter<"SideDish"> | number
+    image?: StringNullableFilter<"SideDish"> | string | null
+    isAvailable?: BoolFilter<"SideDish"> | boolean
+    createdAt?: DateTimeFilter<"SideDish"> | Date | string
+    updatedAt?: DateTimeFilter<"SideDish"> | Date | string
+    menuItems?: MenuItemSideDishListRelationFilter
+  }, "id">
+
+  export type SideDishOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    price?: SortOrder
+    image?: SortOrderInput | SortOrder
+    isAvailable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SideDishCountOrderByAggregateInput
+    _avg?: SideDishAvgOrderByAggregateInput
+    _max?: SideDishMaxOrderByAggregateInput
+    _min?: SideDishMinOrderByAggregateInput
+    _sum?: SideDishSumOrderByAggregateInput
+  }
+
+  export type SideDishScalarWhereWithAggregatesInput = {
+    AND?: SideDishScalarWhereWithAggregatesInput | SideDishScalarWhereWithAggregatesInput[]
+    OR?: SideDishScalarWhereWithAggregatesInput[]
+    NOT?: SideDishScalarWhereWithAggregatesInput | SideDishScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SideDish"> | string
+    name?: StringWithAggregatesFilter<"SideDish"> | string
+    description?: StringWithAggregatesFilter<"SideDish"> | string
+    price?: FloatWithAggregatesFilter<"SideDish"> | number
+    image?: StringNullableWithAggregatesFilter<"SideDish"> | string | null
+    isAvailable?: BoolWithAggregatesFilter<"SideDish"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"SideDish"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SideDish"> | Date | string
+  }
+
+  export type MenuItemSideDishWhereInput = {
+    AND?: MenuItemSideDishWhereInput | MenuItemSideDishWhereInput[]
+    OR?: MenuItemSideDishWhereInput[]
+    NOT?: MenuItemSideDishWhereInput | MenuItemSideDishWhereInput[]
+    id?: StringFilter<"MenuItemSideDish"> | string
+    menuItemId?: StringFilter<"MenuItemSideDish"> | string
+    sideDishId?: StringFilter<"MenuItemSideDish"> | string
+    createdAt?: DateTimeFilter<"MenuItemSideDish"> | Date | string
+    menuItem?: XOR<MenuItemScalarRelationFilter, MenuItemWhereInput>
+    sideDish?: XOR<SideDishScalarRelationFilter, SideDishWhereInput>
+  }
+
+  export type MenuItemSideDishOrderByWithRelationInput = {
+    id?: SortOrder
+    menuItemId?: SortOrder
+    sideDishId?: SortOrder
+    createdAt?: SortOrder
+    menuItem?: MenuItemOrderByWithRelationInput
+    sideDish?: SideDishOrderByWithRelationInput
+  }
+
+  export type MenuItemSideDishWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    menuItemId_sideDishId?: MenuItemSideDishMenuItemIdSideDishIdCompoundUniqueInput
+    AND?: MenuItemSideDishWhereInput | MenuItemSideDishWhereInput[]
+    OR?: MenuItemSideDishWhereInput[]
+    NOT?: MenuItemSideDishWhereInput | MenuItemSideDishWhereInput[]
+    menuItemId?: StringFilter<"MenuItemSideDish"> | string
+    sideDishId?: StringFilter<"MenuItemSideDish"> | string
+    createdAt?: DateTimeFilter<"MenuItemSideDish"> | Date | string
+    menuItem?: XOR<MenuItemScalarRelationFilter, MenuItemWhereInput>
+    sideDish?: XOR<SideDishScalarRelationFilter, SideDishWhereInput>
+  }, "id" | "menuItemId_sideDishId">
+
+  export type MenuItemSideDishOrderByWithAggregationInput = {
+    id?: SortOrder
+    menuItemId?: SortOrder
+    sideDishId?: SortOrder
+    createdAt?: SortOrder
+    _count?: MenuItemSideDishCountOrderByAggregateInput
+    _max?: MenuItemSideDishMaxOrderByAggregateInput
+    _min?: MenuItemSideDishMinOrderByAggregateInput
+  }
+
+  export type MenuItemSideDishScalarWhereWithAggregatesInput = {
+    AND?: MenuItemSideDishScalarWhereWithAggregatesInput | MenuItemSideDishScalarWhereWithAggregatesInput[]
+    OR?: MenuItemSideDishScalarWhereWithAggregatesInput[]
+    NOT?: MenuItemSideDishScalarWhereWithAggregatesInput | MenuItemSideDishScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MenuItemSideDish"> | string
+    menuItemId?: StringWithAggregatesFilter<"MenuItemSideDish"> | string
+    sideDishId?: StringWithAggregatesFilter<"MenuItemSideDish"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"MenuItemSideDish"> | Date | string
   }
 
   export type ContactMessageWhereInput = {
@@ -11231,6 +13854,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutMenuItemsInput
+    sideDishes?: MenuItemSideDishCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateInput = {
@@ -11244,6 +13868,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     categoryId: string
+    sideDishes?: MenuItemSideDishUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUpdateInput = {
@@ -11257,6 +13882,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutMenuItemsNestedInput
+    sideDishes?: MenuItemSideDishUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateInput = {
@@ -11270,6 +13896,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    sideDishes?: MenuItemSideDishUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemCreateManyInput = {
@@ -11308,6 +13935,134 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categoryId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SideDishCreateInput = {
+    id?: string
+    name: string
+    description: string
+    price: number
+    image?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    menuItems?: MenuItemSideDishCreateNestedManyWithoutSideDishInput
+  }
+
+  export type SideDishUncheckedCreateInput = {
+    id?: string
+    name: string
+    description: string
+    price: number
+    image?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    menuItems?: MenuItemSideDishUncheckedCreateNestedManyWithoutSideDishInput
+  }
+
+  export type SideDishUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItems?: MenuItemSideDishUpdateManyWithoutSideDishNestedInput
+  }
+
+  export type SideDishUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItems?: MenuItemSideDishUncheckedUpdateManyWithoutSideDishNestedInput
+  }
+
+  export type SideDishCreateManyInput = {
+    id?: string
+    name: string
+    description: string
+    price: number
+    image?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SideDishUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SideDishUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    menuItem: MenuItemCreateNestedOneWithoutSideDishesInput
+    sideDish: SideDishCreateNestedOneWithoutMenuItemsInput
+  }
+
+  export type MenuItemSideDishUncheckedCreateInput = {
+    id?: string
+    menuItemId: string
+    sideDishId: string
+    createdAt?: Date | string
+  }
+
+  export type MenuItemSideDishUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItem?: MenuItemUpdateOneRequiredWithoutSideDishesNestedInput
+    sideDish?: SideDishUpdateOneRequiredWithoutMenuItemsNestedInput
+  }
+
+  export type MenuItemSideDishUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    sideDishId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishCreateManyInput = {
+    id?: string
+    menuItemId: string
+    sideDishId: string
+    createdAt?: Date | string
+  }
+
+  export type MenuItemSideDishUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    sideDishId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContactMessageCreateInput = {
@@ -11975,6 +14730,16 @@ export namespace Prisma {
     isNot?: CategoryWhereInput
   }
 
+  export type MenuItemSideDishListRelationFilter = {
+    every?: MenuItemSideDishWhereInput
+    some?: MenuItemSideDishWhereInput
+    none?: MenuItemSideDishWhereInput
+  }
+
+  export type MenuItemSideDishOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type MenuItemCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -12036,6 +14801,83 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type SideDishCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    price?: SortOrder
+    image?: SortOrder
+    isAvailable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SideDishAvgOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type SideDishMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    price?: SortOrder
+    image?: SortOrder
+    isAvailable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SideDishMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    price?: SortOrder
+    image?: SortOrder
+    isAvailable?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SideDishSumOrderByAggregateInput = {
+    price?: SortOrder
+  }
+
+  export type MenuItemScalarRelationFilter = {
+    is?: MenuItemWhereInput
+    isNot?: MenuItemWhereInput
+  }
+
+  export type SideDishScalarRelationFilter = {
+    is?: SideDishWhereInput
+    isNot?: SideDishWhereInput
+  }
+
+  export type MenuItemSideDishMenuItemIdSideDishIdCompoundUniqueInput = {
+    menuItemId: string
+    sideDishId: string
+  }
+
+  export type MenuItemSideDishCountOrderByAggregateInput = {
+    id?: SortOrder
+    menuItemId?: SortOrder
+    sideDishId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MenuItemSideDishMaxOrderByAggregateInput = {
+    id?: SortOrder
+    menuItemId?: SortOrder
+    sideDishId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type MenuItemSideDishMinOrderByAggregateInput = {
+    id?: SortOrder
+    menuItemId?: SortOrder
+    sideDishId?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type ContactMessageCountOrderByAggregateInput = {
@@ -12395,6 +15237,20 @@ export namespace Prisma {
     connect?: CategoryWhereUniqueInput
   }
 
+  export type MenuItemSideDishCreateNestedManyWithoutMenuItemInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutMenuItemInput, MenuItemSideDishUncheckedCreateWithoutMenuItemInput> | MenuItemSideDishCreateWithoutMenuItemInput[] | MenuItemSideDishUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutMenuItemInput | MenuItemSideDishCreateOrConnectWithoutMenuItemInput[]
+    createMany?: MenuItemSideDishCreateManyMenuItemInputEnvelope
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+  }
+
+  export type MenuItemSideDishUncheckedCreateNestedManyWithoutMenuItemInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutMenuItemInput, MenuItemSideDishUncheckedCreateWithoutMenuItemInput> | MenuItemSideDishCreateWithoutMenuItemInput[] | MenuItemSideDishUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutMenuItemInput | MenuItemSideDishCreateOrConnectWithoutMenuItemInput[]
+    createMany?: MenuItemSideDishCreateManyMenuItemInputEnvelope
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+  }
+
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -12409,6 +15265,104 @@ export namespace Prisma {
     upsert?: CategoryUpsertWithoutMenuItemsInput
     connect?: CategoryWhereUniqueInput
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutMenuItemsInput, CategoryUpdateWithoutMenuItemsInput>, CategoryUncheckedUpdateWithoutMenuItemsInput>
+  }
+
+  export type MenuItemSideDishUpdateManyWithoutMenuItemNestedInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutMenuItemInput, MenuItemSideDishUncheckedCreateWithoutMenuItemInput> | MenuItemSideDishCreateWithoutMenuItemInput[] | MenuItemSideDishUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutMenuItemInput | MenuItemSideDishCreateOrConnectWithoutMenuItemInput[]
+    upsert?: MenuItemSideDishUpsertWithWhereUniqueWithoutMenuItemInput | MenuItemSideDishUpsertWithWhereUniqueWithoutMenuItemInput[]
+    createMany?: MenuItemSideDishCreateManyMenuItemInputEnvelope
+    set?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    disconnect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    delete?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    update?: MenuItemSideDishUpdateWithWhereUniqueWithoutMenuItemInput | MenuItemSideDishUpdateWithWhereUniqueWithoutMenuItemInput[]
+    updateMany?: MenuItemSideDishUpdateManyWithWhereWithoutMenuItemInput | MenuItemSideDishUpdateManyWithWhereWithoutMenuItemInput[]
+    deleteMany?: MenuItemSideDishScalarWhereInput | MenuItemSideDishScalarWhereInput[]
+  }
+
+  export type MenuItemSideDishUncheckedUpdateManyWithoutMenuItemNestedInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutMenuItemInput, MenuItemSideDishUncheckedCreateWithoutMenuItemInput> | MenuItemSideDishCreateWithoutMenuItemInput[] | MenuItemSideDishUncheckedCreateWithoutMenuItemInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutMenuItemInput | MenuItemSideDishCreateOrConnectWithoutMenuItemInput[]
+    upsert?: MenuItemSideDishUpsertWithWhereUniqueWithoutMenuItemInput | MenuItemSideDishUpsertWithWhereUniqueWithoutMenuItemInput[]
+    createMany?: MenuItemSideDishCreateManyMenuItemInputEnvelope
+    set?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    disconnect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    delete?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    update?: MenuItemSideDishUpdateWithWhereUniqueWithoutMenuItemInput | MenuItemSideDishUpdateWithWhereUniqueWithoutMenuItemInput[]
+    updateMany?: MenuItemSideDishUpdateManyWithWhereWithoutMenuItemInput | MenuItemSideDishUpdateManyWithWhereWithoutMenuItemInput[]
+    deleteMany?: MenuItemSideDishScalarWhereInput | MenuItemSideDishScalarWhereInput[]
+  }
+
+  export type MenuItemSideDishCreateNestedManyWithoutSideDishInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutSideDishInput, MenuItemSideDishUncheckedCreateWithoutSideDishInput> | MenuItemSideDishCreateWithoutSideDishInput[] | MenuItemSideDishUncheckedCreateWithoutSideDishInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutSideDishInput | MenuItemSideDishCreateOrConnectWithoutSideDishInput[]
+    createMany?: MenuItemSideDishCreateManySideDishInputEnvelope
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+  }
+
+  export type MenuItemSideDishUncheckedCreateNestedManyWithoutSideDishInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutSideDishInput, MenuItemSideDishUncheckedCreateWithoutSideDishInput> | MenuItemSideDishCreateWithoutSideDishInput[] | MenuItemSideDishUncheckedCreateWithoutSideDishInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutSideDishInput | MenuItemSideDishCreateOrConnectWithoutSideDishInput[]
+    createMany?: MenuItemSideDishCreateManySideDishInputEnvelope
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+  }
+
+  export type MenuItemSideDishUpdateManyWithoutSideDishNestedInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutSideDishInput, MenuItemSideDishUncheckedCreateWithoutSideDishInput> | MenuItemSideDishCreateWithoutSideDishInput[] | MenuItemSideDishUncheckedCreateWithoutSideDishInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutSideDishInput | MenuItemSideDishCreateOrConnectWithoutSideDishInput[]
+    upsert?: MenuItemSideDishUpsertWithWhereUniqueWithoutSideDishInput | MenuItemSideDishUpsertWithWhereUniqueWithoutSideDishInput[]
+    createMany?: MenuItemSideDishCreateManySideDishInputEnvelope
+    set?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    disconnect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    delete?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    update?: MenuItemSideDishUpdateWithWhereUniqueWithoutSideDishInput | MenuItemSideDishUpdateWithWhereUniqueWithoutSideDishInput[]
+    updateMany?: MenuItemSideDishUpdateManyWithWhereWithoutSideDishInput | MenuItemSideDishUpdateManyWithWhereWithoutSideDishInput[]
+    deleteMany?: MenuItemSideDishScalarWhereInput | MenuItemSideDishScalarWhereInput[]
+  }
+
+  export type MenuItemSideDishUncheckedUpdateManyWithoutSideDishNestedInput = {
+    create?: XOR<MenuItemSideDishCreateWithoutSideDishInput, MenuItemSideDishUncheckedCreateWithoutSideDishInput> | MenuItemSideDishCreateWithoutSideDishInput[] | MenuItemSideDishUncheckedCreateWithoutSideDishInput[]
+    connectOrCreate?: MenuItemSideDishCreateOrConnectWithoutSideDishInput | MenuItemSideDishCreateOrConnectWithoutSideDishInput[]
+    upsert?: MenuItemSideDishUpsertWithWhereUniqueWithoutSideDishInput | MenuItemSideDishUpsertWithWhereUniqueWithoutSideDishInput[]
+    createMany?: MenuItemSideDishCreateManySideDishInputEnvelope
+    set?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    disconnect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    delete?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    connect?: MenuItemSideDishWhereUniqueInput | MenuItemSideDishWhereUniqueInput[]
+    update?: MenuItemSideDishUpdateWithWhereUniqueWithoutSideDishInput | MenuItemSideDishUpdateWithWhereUniqueWithoutSideDishInput[]
+    updateMany?: MenuItemSideDishUpdateManyWithWhereWithoutSideDishInput | MenuItemSideDishUpdateManyWithWhereWithoutSideDishInput[]
+    deleteMany?: MenuItemSideDishScalarWhereInput | MenuItemSideDishScalarWhereInput[]
+  }
+
+  export type MenuItemCreateNestedOneWithoutSideDishesInput = {
+    create?: XOR<MenuItemCreateWithoutSideDishesInput, MenuItemUncheckedCreateWithoutSideDishesInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutSideDishesInput
+    connect?: MenuItemWhereUniqueInput
+  }
+
+  export type SideDishCreateNestedOneWithoutMenuItemsInput = {
+    create?: XOR<SideDishCreateWithoutMenuItemsInput, SideDishUncheckedCreateWithoutMenuItemsInput>
+    connectOrCreate?: SideDishCreateOrConnectWithoutMenuItemsInput
+    connect?: SideDishWhereUniqueInput
+  }
+
+  export type MenuItemUpdateOneRequiredWithoutSideDishesNestedInput = {
+    create?: XOR<MenuItemCreateWithoutSideDishesInput, MenuItemUncheckedCreateWithoutSideDishesInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutSideDishesInput
+    upsert?: MenuItemUpsertWithoutSideDishesInput
+    connect?: MenuItemWhereUniqueInput
+    update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutSideDishesInput, MenuItemUpdateWithoutSideDishesInput>, MenuItemUncheckedUpdateWithoutSideDishesInput>
+  }
+
+  export type SideDishUpdateOneRequiredWithoutMenuItemsNestedInput = {
+    create?: XOR<SideDishCreateWithoutMenuItemsInput, SideDishUncheckedCreateWithoutMenuItemsInput>
+    connectOrCreate?: SideDishCreateOrConnectWithoutMenuItemsInput
+    upsert?: SideDishUpsertWithoutMenuItemsInput
+    connect?: SideDishWhereUniqueInput
+    update?: XOR<XOR<SideDishUpdateToOneWithWhereWithoutMenuItemsInput, SideDishUpdateWithoutMenuItemsInput>, SideDishUncheckedUpdateWithoutMenuItemsInput>
   }
 
   export type EnumGalleryCategoryFieldUpdateOperationsInput = {
@@ -12749,6 +15703,7 @@ export namespace Prisma {
     isDailySpecial?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    sideDishes?: MenuItemSideDishCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateWithoutCategoryInput = {
@@ -12761,6 +15716,7 @@ export namespace Prisma {
     isDailySpecial?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    sideDishes?: MenuItemSideDishUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemCreateOrConnectWithoutCategoryInput = {
@@ -12828,6 +15784,28 @@ export namespace Prisma {
     create: XOR<CategoryCreateWithoutMenuItemsInput, CategoryUncheckedCreateWithoutMenuItemsInput>
   }
 
+  export type MenuItemSideDishCreateWithoutMenuItemInput = {
+    id?: string
+    createdAt?: Date | string
+    sideDish: SideDishCreateNestedOneWithoutMenuItemsInput
+  }
+
+  export type MenuItemSideDishUncheckedCreateWithoutMenuItemInput = {
+    id?: string
+    sideDishId: string
+    createdAt?: Date | string
+  }
+
+  export type MenuItemSideDishCreateOrConnectWithoutMenuItemInput = {
+    where: MenuItemSideDishWhereUniqueInput
+    create: XOR<MenuItemSideDishCreateWithoutMenuItemInput, MenuItemSideDishUncheckedCreateWithoutMenuItemInput>
+  }
+
+  export type MenuItemSideDishCreateManyMenuItemInputEnvelope = {
+    data: MenuItemSideDishCreateManyMenuItemInput | MenuItemSideDishCreateManyMenuItemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CategoryUpsertWithoutMenuItemsInput = {
     update: XOR<CategoryUpdateWithoutMenuItemsInput, CategoryUncheckedUpdateWithoutMenuItemsInput>
     create: XOR<CategoryCreateWithoutMenuItemsInput, CategoryUncheckedCreateWithoutMenuItemsInput>
@@ -12853,6 +15831,198 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishUpsertWithWhereUniqueWithoutMenuItemInput = {
+    where: MenuItemSideDishWhereUniqueInput
+    update: XOR<MenuItemSideDishUpdateWithoutMenuItemInput, MenuItemSideDishUncheckedUpdateWithoutMenuItemInput>
+    create: XOR<MenuItemSideDishCreateWithoutMenuItemInput, MenuItemSideDishUncheckedCreateWithoutMenuItemInput>
+  }
+
+  export type MenuItemSideDishUpdateWithWhereUniqueWithoutMenuItemInput = {
+    where: MenuItemSideDishWhereUniqueInput
+    data: XOR<MenuItemSideDishUpdateWithoutMenuItemInput, MenuItemSideDishUncheckedUpdateWithoutMenuItemInput>
+  }
+
+  export type MenuItemSideDishUpdateManyWithWhereWithoutMenuItemInput = {
+    where: MenuItemSideDishScalarWhereInput
+    data: XOR<MenuItemSideDishUpdateManyMutationInput, MenuItemSideDishUncheckedUpdateManyWithoutMenuItemInput>
+  }
+
+  export type MenuItemSideDishScalarWhereInput = {
+    AND?: MenuItemSideDishScalarWhereInput | MenuItemSideDishScalarWhereInput[]
+    OR?: MenuItemSideDishScalarWhereInput[]
+    NOT?: MenuItemSideDishScalarWhereInput | MenuItemSideDishScalarWhereInput[]
+    id?: StringFilter<"MenuItemSideDish"> | string
+    menuItemId?: StringFilter<"MenuItemSideDish"> | string
+    sideDishId?: StringFilter<"MenuItemSideDish"> | string
+    createdAt?: DateTimeFilter<"MenuItemSideDish"> | Date | string
+  }
+
+  export type MenuItemSideDishCreateWithoutSideDishInput = {
+    id?: string
+    createdAt?: Date | string
+    menuItem: MenuItemCreateNestedOneWithoutSideDishesInput
+  }
+
+  export type MenuItemSideDishUncheckedCreateWithoutSideDishInput = {
+    id?: string
+    menuItemId: string
+    createdAt?: Date | string
+  }
+
+  export type MenuItemSideDishCreateOrConnectWithoutSideDishInput = {
+    where: MenuItemSideDishWhereUniqueInput
+    create: XOR<MenuItemSideDishCreateWithoutSideDishInput, MenuItemSideDishUncheckedCreateWithoutSideDishInput>
+  }
+
+  export type MenuItemSideDishCreateManySideDishInputEnvelope = {
+    data: MenuItemSideDishCreateManySideDishInput | MenuItemSideDishCreateManySideDishInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MenuItemSideDishUpsertWithWhereUniqueWithoutSideDishInput = {
+    where: MenuItemSideDishWhereUniqueInput
+    update: XOR<MenuItemSideDishUpdateWithoutSideDishInput, MenuItemSideDishUncheckedUpdateWithoutSideDishInput>
+    create: XOR<MenuItemSideDishCreateWithoutSideDishInput, MenuItemSideDishUncheckedCreateWithoutSideDishInput>
+  }
+
+  export type MenuItemSideDishUpdateWithWhereUniqueWithoutSideDishInput = {
+    where: MenuItemSideDishWhereUniqueInput
+    data: XOR<MenuItemSideDishUpdateWithoutSideDishInput, MenuItemSideDishUncheckedUpdateWithoutSideDishInput>
+  }
+
+  export type MenuItemSideDishUpdateManyWithWhereWithoutSideDishInput = {
+    where: MenuItemSideDishScalarWhereInput
+    data: XOR<MenuItemSideDishUpdateManyMutationInput, MenuItemSideDishUncheckedUpdateManyWithoutSideDishInput>
+  }
+
+  export type MenuItemCreateWithoutSideDishesInput = {
+    id?: string
+    name: string
+    description: string
+    price: number
+    image?: string | null
+    isAvailable?: boolean
+    isDailySpecial?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: CategoryCreateNestedOneWithoutMenuItemsInput
+  }
+
+  export type MenuItemUncheckedCreateWithoutSideDishesInput = {
+    id?: string
+    name: string
+    description: string
+    price: number
+    image?: string | null
+    isAvailable?: boolean
+    isDailySpecial?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categoryId: string
+  }
+
+  export type MenuItemCreateOrConnectWithoutSideDishesInput = {
+    where: MenuItemWhereUniqueInput
+    create: XOR<MenuItemCreateWithoutSideDishesInput, MenuItemUncheckedCreateWithoutSideDishesInput>
+  }
+
+  export type SideDishCreateWithoutMenuItemsInput = {
+    id?: string
+    name: string
+    description: string
+    price: number
+    image?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SideDishUncheckedCreateWithoutMenuItemsInput = {
+    id?: string
+    name: string
+    description: string
+    price: number
+    image?: string | null
+    isAvailable?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SideDishCreateOrConnectWithoutMenuItemsInput = {
+    where: SideDishWhereUniqueInput
+    create: XOR<SideDishCreateWithoutMenuItemsInput, SideDishUncheckedCreateWithoutMenuItemsInput>
+  }
+
+  export type MenuItemUpsertWithoutSideDishesInput = {
+    update: XOR<MenuItemUpdateWithoutSideDishesInput, MenuItemUncheckedUpdateWithoutSideDishesInput>
+    create: XOR<MenuItemCreateWithoutSideDishesInput, MenuItemUncheckedCreateWithoutSideDishesInput>
+    where?: MenuItemWhereInput
+  }
+
+  export type MenuItemUpdateToOneWithWhereWithoutSideDishesInput = {
+    where?: MenuItemWhereInput
+    data: XOR<MenuItemUpdateWithoutSideDishesInput, MenuItemUncheckedUpdateWithoutSideDishesInput>
+  }
+
+  export type MenuItemUpdateWithoutSideDishesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    isDailySpecial?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: CategoryUpdateOneRequiredWithoutMenuItemsNestedInput
+  }
+
+  export type MenuItemUncheckedUpdateWithoutSideDishesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    isDailySpecial?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SideDishUpsertWithoutMenuItemsInput = {
+    update: XOR<SideDishUpdateWithoutMenuItemsInput, SideDishUncheckedUpdateWithoutMenuItemsInput>
+    create: XOR<SideDishCreateWithoutMenuItemsInput, SideDishUncheckedCreateWithoutMenuItemsInput>
+    where?: SideDishWhereInput
+  }
+
+  export type SideDishUpdateToOneWithWhereWithoutMenuItemsInput = {
+    where?: SideDishWhereInput
+    data: XOR<SideDishUpdateWithoutMenuItemsInput, SideDishUncheckedUpdateWithoutMenuItemsInput>
+  }
+
+  export type SideDishUpdateWithoutMenuItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SideDishUncheckedUpdateWithoutMenuItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13169,6 +16339,7 @@ export namespace Prisma {
     isDailySpecial?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sideDishes?: MenuItemSideDishUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateWithoutCategoryInput = {
@@ -13181,6 +16352,7 @@ export namespace Prisma {
     isDailySpecial?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sideDishes?: MenuItemSideDishUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateManyWithoutCategoryInput = {
@@ -13193,6 +16365,54 @@ export namespace Prisma {
     isDailySpecial?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishCreateManyMenuItemInput = {
+    id?: string
+    sideDishId: string
+    createdAt?: Date | string
+  }
+
+  export type MenuItemSideDishUpdateWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sideDish?: SideDishUpdateOneRequiredWithoutMenuItemsNestedInput
+  }
+
+  export type MenuItemSideDishUncheckedUpdateWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sideDishId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishUncheckedUpdateManyWithoutMenuItemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sideDishId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishCreateManySideDishInput = {
+    id?: string
+    menuItemId: string
+    createdAt?: Date | string
+  }
+
+  export type MenuItemSideDishUpdateWithoutSideDishInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItem?: MenuItemUpdateOneRequiredWithoutSideDishesNestedInput
+  }
+
+  export type MenuItemSideDishUncheckedUpdateWithoutSideDishInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuItemSideDishUncheckedUpdateManyWithoutSideDishInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    menuItemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateManyUserInput = {

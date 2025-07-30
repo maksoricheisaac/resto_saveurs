@@ -12,22 +12,12 @@ import { useAuth } from "@/hooks/useAdminAuth";
 import { RiScanLine } from "@remixicon/react";
 
 function AdminLayoutContent({ children }: { children: React.ReactNode }) {
-  const { user, isPending } = useAuth();
+  const { user } = useAuth();
 
-  if (isPending) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <SidebarProvider className="bg-white">
-      <AppSidebar />
+      <AppSidebar className="bg-white"/>
       <SidebarInset className="overflow-hidden px-4 md:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-white min-h-screen">
         <header className="flex h-16 shrink-0 items-center gap-2 border-b border-gray-200/60  backdrop-blur-sm sticky top-0 z-10">
           <div className="flex flex-1 items-center gap-2 px-3">

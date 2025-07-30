@@ -3,15 +3,39 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Eye, User, Calendar, Mail, Reply } from 'lucide-react';
+import { Eye, User, Calendar, Mail, Reply, CheckCircle } from 'lucide-react';
 import { Message } from '@/types/message';
+import { markMessageAsRead } from '@/actions/admin/message-actions';
+import { toast } from 'sonner';
 
 interface MessageDetailProps {
   message: Message | null;
   onClose: () => void;
+  onUpdateMessage?: (messageId: string, updates: Partial<Message>) => void;
 }
 
-export function MessageDetail({ message, onClose }: MessageDetailProps) {
+export function MessageDetail({ message, onClose, onUpdateMessage }: MessageDetailProps) {
+ 
+  const handleMarkAsRead = async () => {
+    if (!message || message.isRead) return;
+    
+    try {
+      const result = await markMessageAsRead({ messageId: message.id });
+      if (result.data?.success) {
+        toast.success('Message marqué comme lu');
+        if (onUpdateMessage) {
+          onUpdateMessage(message.id, { isRead: true });
+        }
+      } else {
+        toast.error('Erreur lors de la mise à jour');
+      }
+    } catch (error) {
+      toast.error('Erreur lors de la mise à jour', {
+        description: error instanceof Error ? error.message : 'Une erreur est survenue',
+      });
+    }
+  };
+
   function getStatusBadge(status: string) {
     switch (status) {
       case 'non-lu':
@@ -53,19 +77,22 @@ export function MessageDetail({ message, onClose }: MessageDetailProps) {
             <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
               <User className="h-5 w-5 text-amber-600" />
             </div>
-            <div>
+            <div className="flex-1">
               <h3 className="font-semibold text-gray-900">{message.name}</h3>
               <p className="text-sm text-gray-600">{message.email}</p>
+              {message.phone && (
+                <p className="text-sm text-gray-600">{message.phone}</p>
+              )}
             </div>
             <div className="ml-auto">
-              {getStatusBadge(message.status)}
+              {getStatusBadge(message.isRead ? 'lu' : 'non-lu')}
             </div>
           </div>
 
           {/* Date */}
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Calendar className="h-4 w-4" />
-            <span>Reçu le {new Date(message.date).toLocaleDateString('fr-FR', { 
+            <span>Reçu le {new Date(message.createdAt).toLocaleDateString('fr-FR', { 
               year: 'numeric', 
               month: 'long', 
               day: 'numeric',
@@ -80,15 +107,27 @@ export function MessageDetail({ message, onClose }: MessageDetailProps) {
           <div>
             <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
               <Mail className="h-4 w-4 text-amber-600" />
-              Message
+              Contenu du message
             </h4>
-            <div className="p-4 bg-gray-50 rounded-lg border-l-4 border-amber-500">
-              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{message.message}</p>
+            <div className="p-6 bg-gray-50 rounded-lg border-l-4 border-amber-500 min-h-[120px]">
+              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap text-base">
+                {message.message}
+              </p>
             </div>
           </div>
 
           {/* Actions */}
           <div className="flex gap-3 pt-4">
+            {!message.isRead && (
+              <Button 
+                variant="outline"
+                onClick={handleMarkAsRead}
+                className="flex-1"
+              >
+                <CheckCircle className="h-4 w-4 mr-2" />
+                Marquer comme lu
+              </Button>
+            )}
             <Button className="flex-1 bg-amber-600 hover:bg-amber-700 text-white">
               <Reply className="h-4 w-4 mr-2" />
               Répondre

@@ -3,10 +3,29 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { MenuItem, Category } from '@/types';
+import { Badge } from '@/components/ui/badge';
+
+interface SideDish {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  isAvailable: boolean;
+}
+
+interface MenuItemWithSideDishes extends MenuItem {
+  sideDishes?: {
+    id: string;
+    sideDishId: string;
+    sideDish: SideDish;
+    createdAt: Date;
+  }[];
+}
 
 interface MenuItemsProps {
   categories: Category[];
-  filteredItems: MenuItem[];
+  filteredItems: MenuItemWithSideDishes[];
   selectedCategory: string;
 }
 
@@ -58,6 +77,38 @@ export const MenuItems = ({ categories, filteredItems, selectedCategory }: MenuI
                       <span className="text-lg md:text-xl font-bold text-amber-700 whitespace-nowrap">{item.price.toLocaleString()} FCFA</span>
                     </div>
                     <p className="text-gray-600 font-light mt-2 mb-4 md:mb-0 text-base">{item.description}</p>
+                    
+                    {/* Side Dishes */}
+                    {item.sideDishes && item.sideDishes.length > 0 && (
+                      <div className="mt-4">
+                        <p className="text-sm font-medium text-gray-700 mb-2">Accompagnements disponibles:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {item.sideDishes.map((sideDishRel) => (
+                            <Badge
+                              key={sideDishRel.id}
+                              variant="outline"
+                              className="bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100"
+                            >
+                              <div className="flex items-center gap-2">
+                                {sideDishRel.sideDish.image && (
+                                  <div className="w-4 h-4 rounded-full overflow-hidden">
+                                    <Image
+                                      width={16}
+                                      height={16}
+                                      src={sideDishRel.sideDish.image}
+                                      alt={sideDishRel.sideDish.name}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                )}
+                                <span className="text-xs font-medium">{sideDishRel.sideDish.name}</span>
+                                <span className="text-xs text-amber-600">+{sideDishRel.sideDish.price} FCFA</span>
+                              </div>
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}

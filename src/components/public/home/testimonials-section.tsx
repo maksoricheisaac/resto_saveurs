@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import Image from 'next/image';
 import type { Testimonial } from '@/types';
@@ -13,7 +13,7 @@ const testimonials: Testimonial[] = [
     rating: 5,
     comment: 'Excellente expérience culinaire ! Le poulet moambé était délicieux et l\'ambiance très chaleureuse. Je recommande vivement !',
     date: new Date('2024-01-15'),
-    image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg'
+    image: '/fallback.png'
   },
   {
     id: '2',
@@ -21,7 +21,7 @@ const testimonials: Testimonial[] = [
     rating: 5,
     comment: 'Un restaurant authentique qui nous fait découvrir les vraies saveurs du Congo. Le service est impeccable et les prix raisonnables.',
     date: new Date('2024-01-20'),
-    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg'
+    image: '/fallback.png'
   },
   {
     id: '3',
@@ -29,7 +29,7 @@ const testimonials: Testimonial[] = [
     rating: 4,
     comment: 'Très bon restaurant africain. Les plats sont savoureux et bien présentés. L\'équipe est accueillante et professionnelle.',
     date: new Date('2024-01-25'),
-    image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg'
+    image: '/fallback.png'
   },
   {
     id: '4',
@@ -37,7 +37,7 @@ const testimonials: Testimonial[] = [
     rating: 5,
     comment: 'Parfait pour un dîner en famille ou entre amis. La cuisine traditionnelle congolaise est excellente et l\'ambiance conviviale.',
     date: new Date('2024-01-30'),
-    image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg'
+    image: '/fallback.png'
   },
   {
     id: '5',
@@ -45,49 +45,20 @@ const testimonials: Testimonial[] = [
     rating: 5,
     comment: 'Un vrai coup de cœur ! Les saveurs sont authentiques et le personnel très attentionné. Je reviendrai certainement.',
     date: new Date('2024-02-05'),
-    image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg'
+    image: '/fallback.png'
   }
 ];
 
 export const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
     }, 5000);
 
     return () => clearInterval(timer);
   }, []);
-
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
-    })
-  };
-
-  const swipeConfidenceThreshold = 10000;
-  const swipePower = (offset: number, velocity: number) => {
-    return Math.abs(offset) * velocity;
-  };
-
-  const paginate = (newDirection: number) => {
-    setDirection(newDirection);
-    setCurrentIndex((prev) => (prev + newDirection + testimonials.length) % testimonials.length);
-  };
 
   const formatDate = (date: Date) => {
     return new Intl.DateTimeFormat('fr-FR', {
@@ -116,98 +87,74 @@ export const TestimonialsSection = () => {
         </motion.div>
 
         <div className="relative max-w-4xl mx-auto">
-          {/* Carousel */}
-          <div className="relative overflow-hidden rounded-2xl bg-white shadow-2xl">
-            <AnimatePresence initial={false} custom={direction}>
-              <motion.div
-                key={currentIndex}
-                custom={direction}
-                variants={slideVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 }
-                }}
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={1}
-                onDragEnd={(e, { offset, velocity }) => {
-                  const swipe = swipePower(offset.x, velocity.x);
+          {/* Carousel simplifié */}
+          <div className="relative overflow-hidden rounded-2xl bg-white shadow-2xl min-h-[400px] p-8 md:p-12">
+            <div className="flex flex-col md:flex-row items-center">
+              {/* Image du client */}
+              <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-8 flex-shrink-0 bg-gray-200">
+                <Image
+                  src={testimonials[currentIndex].image || '/fallback.png'}
+                  alt={testimonials[currentIndex].name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = '/fallback.png';
+                  }}
+                />
+              </div>
 
-                  if (swipe < -swipeConfidenceThreshold) {
-                    paginate(1);
-                  } else if (swipe > swipeConfidenceThreshold) {
-                    paginate(-1);
-                  }
-                }}
-                className="absolute w-full h-full"
-              >
-                <div className="flex flex-col md:flex-row items-center p-8 md:p-12">
-                  {/* Image du client */}
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mb-6 md:mb-0 md:mr-8 flex-shrink-0">
-                    <Image
-                      src={testimonials[currentIndex].image || '/fallback.png'}
-                      alt={testimonials[currentIndex].name}
-                      width={128}
-                      height={128}
-                      className="w-full h-full object-cover"
-                    />
+              {/* Contenu du témoignage */}
+              <div className="flex-1 text-center md:text-left">
+                {/* Icône de citation */}
+                <Quote className="w-8 h-8 text-amber-500 mb-4 mx-auto md:mx-0" />
+                
+                {/* Commentaire */}
+                <blockquote className="text-lg md:text-xl text-gray-700 mb-6 italic leading-relaxed">
+                  &ldquo;{testimonials[currentIndex].comment}&rdquo;
+                </blockquote>
+
+                {/* Informations du client */}
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-1">
+                      {testimonials[currentIndex].name}
+                    </h4>
+                    <p className="text-gray-500 text-sm">
+                      {formatDate(testimonials[currentIndex].date)}
+                    </p>
                   </div>
-
-                  {/* Contenu du témoignage */}
-                  <div className="flex-1 text-center md:text-left">
-                    {/* Icône de citation */}
-                    <Quote className="w-8 h-8 text-amber-500 mb-4 mx-auto md:mx-0" />
-                    
-                    {/* Commentaire */}
-                    <blockquote className="text-lg md:text-xl text-gray-700 mb-6 italic leading-relaxed">
-                      &ldquo;{testimonials[currentIndex].comment}&rdquo;
-                    </blockquote>
-
-                    {/* Informations du client */}
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-                      <div>
-                        <h4 className="text-xl font-bold text-gray-900 mb-1">
-                          {testimonials[currentIndex].name}
-                        </h4>
-                        <p className="text-gray-500 text-sm">
-                          {formatDate(testimonials[currentIndex].date)}
-                        </p>
-                      </div>
-                      
-                      {/* Note */}
-                      <div className="flex items-center gap-1 mt-2 md:mt-0">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            size={20}
-                            className={`${
-                              i < testimonials[currentIndex].rating
-                                ? 'text-yellow-400 fill-current'
-                                : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
+                  
+                  {/* Note */}
+                  <div className="flex items-center gap-1 mt-2 md:mt-0">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        size={20}
+                        className={`${
+                          i < testimonials[currentIndex].rating
+                            ? 'text-yellow-400 fill-current'
+                            : 'text-gray-300'
+                        }`}
+                      />
+                    ))}
                   </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+              </div>
+            </div>
 
             {/* Boutons de navigation */}
             <button
-              onClick={() => paginate(-1)}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+              onClick={() => setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 z-10"
             >
               <ChevronLeft size={24} className="text-gray-700" />
             </button>
             
             <button
-              onClick={() => paginate(1)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
+              onClick={() => setCurrentIndex((prev) => (prev + 1) % testimonials.length)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 z-10"
             >
               <ChevronRight size={24} className="text-gray-700" />
             </button>
@@ -218,10 +165,7 @@ export const TestimonialsSection = () => {
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                onClick={() => {
-                  setDirection(index > currentIndex ? 1 : -1);
-                  setCurrentIndex(index);
-                }}
+                onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 rounded-full transition-all duration-200 ${
                   index === currentIndex
                     ? 'bg-amber-600 scale-125'

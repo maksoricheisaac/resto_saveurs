@@ -1,25 +1,86 @@
 "use server";
 
+import { Prisma } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
 
-// Récupérer tous les plats disponibles pour le menu public
-export async function getPublicMenuItems() {
-  try {
-    const menuItems = await prisma.menuItem.findMany({
-      where: {
-        isAvailable: true,
-      },
-      include: {
-        category: true,
-      },
-      orderBy: [
-        { isDailySpecial: 'desc' },
-        { category: { name: 'asc' } },
-        { name: 'asc' }
-      ],
-    });
 
-    return { success: true, data: menuItems };
+// Récupérer tous les plats disponibles pour le menu public
+export async function getPublicMenuItems(options?: {
+  categoryId?: string;
+  search?: string;
+  minPrice?: number;
+  maxPrice?: number;
+  sortBy?: 'name' | 'price' | 'createdAt';
+  sortOrder?: 'asc' | 'desc';
+}) {
+  try {
+    const {
+      categoryId,
+      search,
+      minPrice,
+      maxPrice,
+      sortBy = 'name',
+      sortOrder = 'asc'
+    } = options || {};
+
+    // Construire les filtres pour les plats
+    const menuWhere: Prisma.MenuItemWhereInput = {
+      isAvailable: true,
+      ...(categoryId && { categoryId }),
+      ...(search && {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' as const } },
+          { description: { contains: search, mode: 'insensitive' as const } }
+        ]
+      }),
+      ...(minPrice !== undefined && { price: { gte: minPrice } }),
+      ...(maxPrice !== undefined && { price: { lte: maxPrice } })
+    };
+
+    // Construire les filtres pour les accompagnements
+    const sideDishWhere= {
+      isAvailable: true,
+      ...(search && {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' as const } },
+          { description: { contains: search, mode: 'insensitive' as const } }
+        ]
+      }),
+      ...(minPrice !== undefined && { price: { gte: minPrice } }),
+      ...(maxPrice !== undefined && { price: { lte: maxPrice } })
+    };
+
+    const [menuItems, sideDishes] = await Promise.all([
+      prisma.menuItem.findMany({
+        where: menuWhere,
+        include: {
+          category: true,
+          sideDishes: {
+            include: {
+              sideDish: true
+            }
+          }
+        },
+        orderBy: [
+          { isDailySpecial: 'desc' },
+          { [sortBy]: sortOrder }
+        ],
+      }),
+      prisma.sideDish.findMany({
+        where: sideDishWhere,
+        orderBy: {
+          [sortBy]: sortOrder
+        },
+      })
+    ]);
+
+    return { 
+      success: true, 
+      data: {
+        menuItems,
+        sideDishes
+      }
+    };
   } catch (error) {
     console.error('Erreur récupération menu public:', error);
     return { success: false, error: 'Erreur lors de la récupération du menu' };
@@ -55,6 +116,11 @@ export async function getPublicDailySpecials() {
       },
       include: {
         category: true,
+        sideDishes: {
+          include: {
+            sideDish: true
+          }
+        }
       },
       orderBy: {
         createdAt: 'desc',
@@ -78,6 +144,11 @@ export async function getPublicMenuItemsByCategory(categoryId: string) {
       },
       include: {
         category: true,
+        sideDishes: {
+          include: {
+            sideDish: true
+          }
+        }
       },
       orderBy: {
         name: 'asc',
@@ -104,6 +175,11 @@ export async function searchPublicMenuItems(searchTerm: string) {
       },
       include: {
         category: true,
+        sideDishes: {
+          include: {
+            sideDish: true
+          }
+        }
       },
       orderBy: [
         { isDailySpecial: 'desc' },

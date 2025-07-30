@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getPublicMenuItems, getPublicCategories } from '@/actions/public/menu-action';
-import type { MenuItem, Category } from '@/types';
+import type { Category } from '@/types';
 import { HeroBanner } from '@/components/public/menu/hero-banner';
 import { DailySpecials } from '@/components/public/menu/daily-specials';
 import { SearchFilters } from '@/components/public/menu/search-filters';
@@ -10,6 +10,79 @@ import { LoadingState } from '@/components/public/menu/loading-state';
 import { MenuItems } from '@/components/public/menu/menu-items';
 import { NoResults } from '@/components/public/menu/no-results';
 import { CtaSection } from '@/components/public/menu/cta-section';
+
+// Types pour les données Prisma
+interface PrismaMenuItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string | null;
+  isAvailable: boolean;
+  isDailySpecial: boolean;
+  createdAt: Date;
+  category: {
+    id: string;
+    name: string;
+    description: string | null;
+    isActive: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  sideDishes: Array<{
+    id: string;
+    sideDishId: string;
+    sideDish: {
+      id: string;
+      name: string;
+      description: string;
+      price: number;
+      image: string | null;
+      isAvailable: boolean;
+      createdAt: Date;
+      updatedAt: Date;
+    };
+    createdAt: Date;
+  }>;
+}
+
+interface PrismaCategory {
+  id: string;
+  name: string;
+  description: string | null;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface SideDish {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  isAvailable: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  category: string;
+  isAvailable: boolean;
+  isDailySpecial: boolean;
+  createdAt: Date;
+  sideDishes?: Array<{
+    id: string;
+    sideDishId: string;
+    sideDish: SideDish;
+    createdAt: Date;
+  }>;
+}
 
 export default function MenuClient() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -28,8 +101,8 @@ export default function MenuClient() {
           getPublicCategories()
         ]);
 
-        if (menuResult.success) {
-          const transformedMenuItems = (menuResult?.data || []).map(item => ({
+        if (menuResult.success && menuResult.data) {
+          const transformedMenuItems = (menuResult.data.menuItems || []).map((item: PrismaMenuItem) => ({
             id: item.id,
             name: item.name,
             description: item.description,
@@ -39,15 +112,32 @@ export default function MenuClient() {
             isAvailable: item.isAvailable,
             isDailySpecial: item.isDailySpecial,
             createdAt: item.createdAt,
+            sideDishes: item.sideDishes.map(sd => ({
+              id: sd.id,
+              sideDishId: sd.sideDishId,
+              sideDish: {
+                id: sd.sideDish.id,
+                name: sd.sideDish.name,
+                description: sd.sideDish.description,
+                price: sd.sideDish.price,
+                image: sd.sideDish.image || '',
+                isAvailable: sd.sideDish.isAvailable,
+                createdAt: sd.sideDish.createdAt,
+                updatedAt: sd.sideDish.updatedAt,
+              },
+              createdAt: sd.createdAt,
+            })),
           }));
           setMenuItems(transformedMenuItems);
+          
+         
         }
 
         if (categoriesResult.success) {
-          const transformedCategories = (categoriesResult?.data || []).map(item => ({
+          const transformedCategories = (categoriesResult?.data || []).map((item: PrismaCategory) => ({
             id: item.id,
             name: item.name,
-            description: item.description,
+            description: item.description || '',
             isActive: item.isActive,
             createdAt: item.createdAt,
             updatedAt: item.updatedAt,
@@ -103,6 +193,7 @@ export default function MenuClient() {
         {/* No Results */}
         {!loading && filteredItems.length === 0 && <NoResults />}
 
+        
         {/* CTA Section */}
         <CtaSection />
       </div>

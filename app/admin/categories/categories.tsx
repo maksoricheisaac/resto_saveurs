@@ -219,8 +219,6 @@ export default function CategoriesClient() {
                 currentPage={pagination.page}
                 totalPages={pagination.totalPages}
                 onPageChange={handlePageChange}
-                hasNextPage={pagination.hasNextPage}
-                hasPreviousPage={pagination.hasPreviousPage}
               />
             )}
           </div>

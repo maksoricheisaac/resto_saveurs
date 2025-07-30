@@ -5,7 +5,6 @@ import {
   UtensilsCrossed,
   Mail,
   LogOut,
-  Settings,
 } from "lucide-react";
 import {
   Sidebar,
@@ -47,6 +46,12 @@ const data = {
           description: "Gérer les plats"
         },
         {
+          title: "Accompagnements",
+          url: "/admin/side-dishes",
+          icon: UtensilsCrossed,
+          description: "Gérer les accompagnements"
+        },
+        {
           title: "Messages",
           url: "/admin/messages",
           icon: Mail,
@@ -83,8 +88,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroupLabel className="uppercase text-gray-500/70 text-xs tracking-widest mb-3 px-2 font-semibold">
               {item.title}
             </SidebarGroupLabel>
-            <SidebarGroupContent className="px-0">
-              <SidebarMenu className="space-y-2">
+            <SidebarGroupContent className="px-0 bg-white">
+              <SidebarMenu className="space-y-2 bg-white">
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title} className="mb-1">
                     <SidebarMenuButton
@@ -131,16 +136,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarFooter className="mt-4 px-2 bg-white">
         <hr className="border-t border-gray-200/60 " />
         <SidebarMenu className="space-y-2">
-          <SidebarMenuItem>
-            <SidebarMenuButton className="font-medium gap-3 h-11 rounded-lg px-3 flex items-center hover:bg-gray-50 hover:text-gray-700 text-gray-600 transition-all duration-200">
-              <Settings
-                className="text-gray-400 group-hover/menu-button:text-gray-600 transition-colors duration-200"
-                size={20}
-                aria-hidden="true"
-              />
-              <span className="text-sm font-medium">Paramètres</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
+         
           <SidebarMenuItem>
             <SidebarMenuButton className="font-medium gap-3 h-11 rounded-lg px-3 flex items-center hover:bg-red-50 hover:text-red-700 text-gray-600 transition-all duration-200">
               <LogOut

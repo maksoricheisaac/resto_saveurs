@@ -1,10 +1,12 @@
 export type Message = {
-  id: number;
+  id: string;
   name: string;
   email: string;
+  phone: string | null;
   message: string;
-  date: string;
-  status: 'non-lu' | 'lu' | 'repondu';
+  isRead: boolean;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type MessageStatus = 'non-lu' | 'lu' | 'repondu'; 

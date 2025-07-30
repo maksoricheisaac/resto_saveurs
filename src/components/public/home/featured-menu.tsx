@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { MenuItem } from '@/types';
 
 interface FeaturedMenuProps {
@@ -110,20 +110,7 @@ export const FeaturedMenu = ({ featuredItems }: FeaturedMenuProps) => {
                   {item.description}
                 </p>
                 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        size={16}
-                        className={`${
-                          i < 4 ? 'text-yellow-400 fill-current' : 'text-gray-300'
-                        }`}
-                      />
-                    ))}
-                    <span className="text-sm text-gray-500 ml-2">4.8</span>
-                  </div>
-                  
+                <div className="flex items-center justify-between">                  
                   <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
                     {item.category}
                   </span>

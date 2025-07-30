@@ -6,15 +6,19 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
+import { Badge } from '@/components/ui/badge';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Plus, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { Plus, Image as ImageIcon, Loader2, X } from 'lucide-react';
 import { Menu, MenuFormData, Category } from '@/types/menu';
 import ImageUploader from '@/components/image-uploader';
 import { useState, useEffect } from 'react';
 import { createMenuItem, updateMenuItem, MenuFormData as ServerMenuFormData } from '@/actions/admin/menu-action';
 import { useToast } from '@/hooks/use-toast';
+import { getPublicSideDishes } from '@/actions/public/side-dish-action';
+import Image from 'next/image';
+import { SideDish } from '@/generated/prisma';
 
 const menuSchema = z.object({
   name: z.string().min(2, 'Le nom est requis'),
@@ -25,6 +29,7 @@ const menuSchema = z.object({
   isDailySpecial: z.boolean().default(false),
   preparationTime: z.string().optional(),
   allergens: z.string().optional(),
+  sideDishIds: z.array(z.string()).optional(),
 });
 
 interface MenuFormProps {
@@ -49,6 +54,8 @@ export function MenuForm({
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageUrl, setImageUrl] = useState('');
+  const [availableSideDishes, setAvailableSideDishes] = useState<SideDish[]>([]);
+  const [selectedSideDishes, setSelectedSideDishes] = useState<string[]>([]);
 
   const form = useForm({
     resolver: zodResolver(menuSchema),
@@ -59,21 +66,40 @@ export function MenuForm({
       image: '', 
       categoryId: '',
       isDailySpecial: false,
+      sideDishIds: [],
     },
   });
+
+  // Charger les accompagnements disponibles
+  useEffect(() => {
+    const loadSideDishes = async () => {
+      try {
+        const result = await getPublicSideDishes();
+        if (result.success && result.data) {
+          setAvailableSideDishes(result.data);
+        }
+      } catch (error) {
+        console.error('Erreur chargement accompagnements:', error);
+      }
+    };
+    loadSideDishes();
+  }, []);
 
   // Mettre à jour les valeurs du formulaire quand on édite
   useEffect(() => {
     if (editingMenu && editing) {
+      const sideDishIds = editingMenu.sideDishes?.map(sd => sd.sideDishId) || [];
       form.reset({
         name: editingMenu.name,
         description: editingMenu.description,
         price: editingMenu.price,
         image: editingMenu.image,
         categoryId: editingMenu.categoryId,
-        isDailySpecial: editingMenu.isDailySpecial
+        isDailySpecial: editingMenu.isDailySpecial,
+        sideDishIds: sideDishIds,
       });
       setImageUrl(editingMenu.image);
+      setSelectedSideDishes(sideDishIds);
     } else {
       form.reset({
         name: '', 
@@ -81,9 +107,11 @@ export function MenuForm({
         price: '', 
         image: '', 
         categoryId: '',
-        isDailySpecial: false
+        isDailySpecial: false,
+        sideDishIds: [],
       });
       setImageUrl('');
+      setSelectedSideDishes([]);
     }
   }, [editingMenu, editing, form]);
 
@@ -92,12 +120,14 @@ export function MenuForm({
     setEditing(null);
     form.reset();
     setImageUrl('');
+    setSelectedSideDishes([]);
   };
 
   const handleOpenModal = () => {
     setEditing(null);
     form.reset();
     setImageUrl('');
+    setSelectedSideDishes([]);
   };
 
   const handleImageUpload = (url: string) => {
@@ -105,6 +135,15 @@ export function MenuForm({
       setImageUrl(url);
       form.setValue('image', url);
     }
+  };
+
+  const handleSideDishToggle = (sideDishId: string) => {
+    const newSelected = selectedSideDishes.includes(sideDishId)
+      ? selectedSideDishes.filter(id => id !== sideDishId)
+      : [...selectedSideDishes, sideDishId];
+    
+    setSelectedSideDishes(newSelected);
+    form.setValue('sideDishIds', newSelected);
   };
 
   const onSubmit = async (values: MenuFormData) => {
@@ -123,6 +162,7 @@ export function MenuForm({
         ...values,
         image: imageUrl,
         price: Number(values.price),
+        sideDishIds: selectedSideDishes,
       };
 
       let result;
@@ -270,6 +310,84 @@ export function MenuForm({
                       onImageUpload={handleImageUpload}
                       initialImage={editingMenu?.image}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="sideDishIds"
+              render={() => (
+                <FormItem>
+                  <FormLabel className="text-sm font-medium text-gray-700">Accompagnements</FormLabel>
+                  <FormControl>
+                    <div className="space-y-3">
+                      <div className="grid grid-cols-1 gap-2 max-h-40 overflow-y-auto">
+                        {availableSideDishes.map((sideDish) => (
+                          <div
+                            key={sideDish.id}
+                            className={`flex items-center justify-between p-3 border rounded-lg cursor-pointer transition-colors ${
+                              selectedSideDishes.includes(sideDish.id)
+                                ? 'border-amber-500 bg-amber-50'
+                                : 'border-gray-200 hover:border-gray-300'
+                            }`}
+                            onClick={() => handleSideDishToggle(sideDish.id)}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100">
+                                {sideDish.image && (
+                                  <Image
+                                    width={40}
+                                    height={40}
+                                    src={sideDish.image}
+                                    alt={sideDish.name}
+                                    className="w-full h-full object-cover"
+                                  />
+                                )}
+                              </div>
+                              <div>
+                                <p className="font-medium text-sm">{sideDish.name}</p>
+                                <p className="text-xs text-gray-500">{sideDish.price} FCFA</p>
+                              </div>
+                            </div>
+                            {selectedSideDishes.includes(sideDish.id) && (
+                              <Badge variant="secondary" className="bg-amber-100 text-amber-800">
+                                Sélectionné
+                              </Badge>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      {selectedSideDishes.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          <p className="text-sm text-gray-600 w-full">Accompagnements sélectionnés:</p>
+                          {selectedSideDishes.map((sideDishId) => {
+                            const sideDish = availableSideDishes.find(sd => sd.id === sideDishId);
+                            return sideDish ? (
+                              <Badge
+                                key={sideDishId}
+                                variant="outline"
+                                className="flex items-center gap-1"
+                              >
+                                {sideDish.name}
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSideDishToggle(sideDishId);
+                                  }}
+                                  className="ml-1 hover:text-red-500"
+                                >
+                                  <X className="h-3 w-3" />
+                                </button>
+                              </Badge>
+                            ) : null;
+                          })}
+                        </div>
+                      )}
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

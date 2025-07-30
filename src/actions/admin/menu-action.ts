@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import prisma from "@/lib/prisma";
+import { Prisma } from "@/generated/prisma";
 
 // Schéma de validation pour les plats
 const menuItemSchema = z.object({
@@ -14,6 +15,7 @@ const menuItemSchema = z.object({
   isDailySpecial: z.boolean().default(false),
   preparationTime: z.string().optional(),
   allergens: z.string().optional(),
+  sideDishIds: z.array(z.string()).optional(),
 });
 
 export type MenuFormData = z.infer<typeof menuItemSchema>;
@@ -46,20 +48,29 @@ export async function createMenuItem(formData: MenuFormData) {
   try {
     const validatedData = menuItemSchema.parse(formData);
 
-         const menuItem = await prisma.menuItem.create({
-       data: {
-         name: validatedData.name,
-         description: validatedData.description,
-         price: validatedData.price,
-         image: validatedData.image,
-         categoryId: validatedData.categoryId,
-         isDailySpecial: validatedData.isDailySpecial,
-
-       },
-       include: {
-         category: true,
-       },
-     });
+    const menuItem = await prisma.menuItem.create({
+      data: {
+        name: validatedData.name,
+        description: validatedData.description,
+        price: validatedData.price,
+        image: validatedData.image,
+        categoryId: validatedData.categoryId,
+        isDailySpecial: validatedData.isDailySpecial,
+        sideDishes: validatedData.sideDishIds && validatedData.sideDishIds.length > 0 ? {
+          create: validatedData.sideDishIds.map(sideDishId => ({
+            sideDishId
+          }))
+        } : undefined,
+      },
+      include: {
+        category: true,
+        sideDishes: {
+          include: {
+            sideDish: true
+          }
+        }
+      },
+    });
 
     revalidatePath('/admin/menu');
     return { success: true, data: menuItem };
@@ -77,6 +88,11 @@ export async function updateMenuItem(id: string, formData: MenuFormData) {
   try {
     const validatedData = menuItemSchema.parse(formData);
 
+    // Supprimer les relations existantes
+    await prisma.menuItemSideDish.deleteMany({
+      where: { menuItemId: id }
+    });
+
     const menuItem = await prisma.menuItem.update({
       where: { id },
       data: {
@@ -86,9 +102,19 @@ export async function updateMenuItem(id: string, formData: MenuFormData) {
         image: validatedData.image,
         categoryId: validatedData.categoryId,
         isDailySpecial: validatedData.isDailySpecial,
+        sideDishes: validatedData.sideDishIds && validatedData.sideDishIds.length > 0 ? {
+          create: validatedData.sideDishIds.map(sideDishId => ({
+            sideDishId
+          }))
+        } : undefined,
       },
       include: {
         category: true,
+        sideDishes: {
+          include: {
+            sideDish: true
+          }
+        }
       },
     });
 
@@ -125,6 +151,11 @@ export async function getMenuItem(id: string) {
       where: { id },
       include: {
         category: true,
+        sideDishes: {
+          include: {
+            sideDish: true
+          }
+        }
       },
     });
 
@@ -146,7 +177,11 @@ export async function getMenuItems(options: {
   search?: string;
   categoryId?: string;
   isDailySpecial?: boolean;
+  isAvailable?: boolean;
   sortBy?: 'name' | 'price' | 'createdAt';
+  sortOrder?: 'asc' | 'desc';
+  minPrice?: number;
+  maxPrice?: number;
 }) {
   try {
     const {
@@ -155,39 +190,33 @@ export async function getMenuItems(options: {
       search,
       categoryId,
       isDailySpecial,
+      isAvailable,
       sortBy = 'createdAt',
+      sortOrder = 'desc',
+      minPrice,
+      maxPrice
     } = options;
 
     const skip = (page - 1) * limit;
 
     // Construire les filtres
-    const where: {
-      OR?: Array<{
-        name?: { contains: string; mode: 'insensitive' };
-        description?: { contains: string; mode: 'insensitive' };
-      }>;
-      categoryId?: string;
-      isDailySpecial?: boolean;
-    } = {};
-
-    if (search) {
-      where.OR = [
-        { name: { contains: search, mode: 'insensitive' } },
-        { description: { contains: search, mode: 'insensitive' } },
-      ];
-    }
-
-    if (categoryId) {
-      where.categoryId = categoryId;
-    }
-
-    if (isDailySpecial !== undefined) {
-      where.isDailySpecial = isDailySpecial;
-    }
-
+    const where: Prisma.MenuItemWhereInput = {
+      AND: [
+        search ? {
+          OR: [
+            { name: { contains: search, mode: 'insensitive' as const } },
+            { description: { contains: search, mode: 'insensitive' as const } }
+          ]
+        } : {},
+        categoryId ? { categoryId } : {},
+        isDailySpecial !== undefined ? { isDailySpecial } : {},
+        isAvailable !== undefined ? { isAvailable } : {},
+        minPrice !== undefined ? { price: { gte: minPrice } } : {},
+        maxPrice !== undefined ? { price: { lte: maxPrice } } : {},
+      ]
+    };
     // Construire le tri
-    const orderBy = sortBy === 'name' ? { name: 'asc' as const } : sortBy === 'price' ? { price: 'asc' as const } : { createdAt: 'desc' as const };
-   
+    const orderBy = { [sortBy]: sortOrder };
 
     // Récupérer les plats
     const [menuItems, total] = await Promise.all([
@@ -195,6 +224,11 @@ export async function getMenuItems(options: {
         where,
         include: {
           category: true,
+          sideDishes: {
+            include: {
+              sideDish: true
+            }
+          }
         },
         orderBy,
         skip,
@@ -264,6 +298,11 @@ export async function getDailySpecials() {
       },
       include: {
         category: true,
+        sideDishes: {
+          include: {
+            sideDish: true
+          }
+        }
       },
       orderBy: {
         createdAt: 'desc',
@@ -280,20 +319,24 @@ export async function getDailySpecials() {
 // Récupérer les statistiques des plats
 export async function getMenuStats() {
   try {
-    const [totalItems, dailySpecials, availableItems, categories] = await Promise.all([
+    const [totalItems, dailySpecials, availableItems, categories, totalSideDishes, totalMessages] = await Promise.all([
       prisma.menuItem.count(),
       prisma.menuItem.count({ where: { isDailySpecial: true } }),
       prisma.menuItem.count({ where: { isAvailable: true } }),
       prisma.category.count({ where: { isActive: true } }),
+      prisma.sideDish.count({ where: { isAvailable: true } }),
+      prisma.contactMessage.count({ where: { isRead: false } }),
     ]);
 
     return {
       success: true,
       data: {
-        totalItems,
+        totalMenuItems: totalItems,
         dailySpecials,
         availableItems,
-        categories,
+        totalCategories: categories,
+        totalSideDishes,
+        totalMessages,
       },
     };
   } catch (error) {
