@@ -1,5 +1,7 @@
+import { checkPermission } from '@/lib/auth-helpers';
 import CategoriesClient from './categories';
 
-export default function CategoriesPage() {
+export default async function CategoriesPage() {
+  await checkPermission();
   return <CategoriesClient />;
 } 

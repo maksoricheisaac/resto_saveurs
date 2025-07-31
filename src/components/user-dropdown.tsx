@@ -3,16 +3,13 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/lib/auth-client";
-
-import { RiSettingsLine, RiLogoutBoxLine } from "@remixicon/react";
-import { useRouter } from "next/navigation";
+import { RiLogoutBoxLine } from "@remixicon/react";
 
 type UserDropdownProps = {
   user: {
@@ -23,8 +20,7 @@ type UserDropdownProps = {
   };
 };
 
-export default function UserDropdown({ user }: UserDropdownProps) {
-  const router = useRouter();
+export  function UserDropdown({ user }: UserDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -52,17 +48,6 @@ export default function UserDropdown({ user }: UserDropdownProps) {
             {user.role}
           </span>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => router.push("/admin/settings")}>
-            <RiSettingsLine
-              size={16}
-              className="opacity-60"
-              aria-hidden="true"
-            />
-            <span>Paramètres</span>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={async () => await signOut()}>
           <RiLogoutBoxLine

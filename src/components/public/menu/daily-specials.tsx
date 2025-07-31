@@ -5,10 +5,9 @@ import { motion } from 'framer-motion';
 import { Star, Clock, Tag } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import type { MenuItem } from '@/types';
 import Image from 'next/image';
-import Link from 'next/link';
+
 
 interface DailySpecialsProps {
   dailySpecials: MenuItem[];
@@ -109,22 +108,7 @@ export const DailySpecials = ({ dailySpecials }: DailySpecialsProps) => {
           ))}
         </motion.div>
 
-        <motion.div
-          className="text-center mt-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-        >
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="border-amber-600 text-amber-600 hover:bg-amber-600 hover:text-white"
-            asChild
-          >
-            <Link href="/menu">Voir tout le menu</Link>
-          </Button>
-        </motion.div>
+        
       </div>
     </section>
   );

@@ -10,6 +10,7 @@ import { LoadingState } from '@/components/public/menu/loading-state';
 import { MenuItems } from '@/components/public/menu/menu-items';
 import { NoResults } from '@/components/public/menu/no-results';
 import { CtaSection } from '@/components/public/menu/cta-section';
+import { toast } from 'sonner';
 
 // Types pour les données Prisma
 interface PrismaMenuItem {
@@ -73,6 +74,7 @@ interface MenuItem {
   price: number;
   image: string;
   category: string;
+  categoryId: string;
   isAvailable: boolean;
   isDailySpecial: boolean;
   createdAt: Date;
@@ -109,6 +111,7 @@ export default function MenuClient() {
             price: item.price,
             image: item.image || '',
             category: item.category.name,
+            categoryId: item.category.id,
             isAvailable: item.isAvailable,
             isDailySpecial: item.isDailySpecial,
             createdAt: item.createdAt,
@@ -129,8 +132,6 @@ export default function MenuClient() {
             })),
           }));
           setMenuItems(transformedMenuItems);
-          
-         
         }
 
         if (categoriesResult.success) {
@@ -144,8 +145,12 @@ export default function MenuClient() {
           }));
           setCategories(transformedCategories);
         }
-      } catch (error) {
-        console.error('Erreur chargement données:', error);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          toast.error(error.message);
+        } else {
+          toast.error('Une erreur inconnue est survenue');
+        }
       } finally {
         setLoading(false);
       }
@@ -160,11 +165,13 @@ export default function MenuClient() {
   );
 
   const filteredItems = menuItems.filter((item: MenuItem) => {
-    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'all' || item.categoryId === selectedCategory;
     const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          item.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch && item.isAvailable;
   });
+
+
 
   return (
     <div className="min-h-screen bg-gray-50">

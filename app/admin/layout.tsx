@@ -2,12 +2,11 @@
 "use client"
 
 import { AppSidebar } from "@/components/app-sidebar";
-import FeedbackDialog from "@/components/feedback-dialog";
 import { SidebarInset } from "@/components/ui/sidebar";
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import UserDropdown from "@/components/user-dropdown";
+import { UserDropdown } from "@/components/user-dropdown";
 import { useAuth } from "@/hooks/useAdminAuth";
 import { RiScanLine } from "@remixicon/react";
 
@@ -42,7 +41,6 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
             </Breadcrumb>
           </div>
           <div className="flex gap-3 ml-auto">
-            <FeedbackDialog />
             <UserDropdown user={
               {
                 name: user?.name || "",
@@ -53,7 +51,7 @@ function AdminLayoutContent({ children }: { children: React.ReactNode }) {
             } />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-6 lg:gap-8 py-6 lg:py-8 animate-in fade-in-0 slide-in-from-bottom-2 duration-500">
+        <div className="flex flex-1 flex-col gap-6 lg:gap-8 py-6 lg:py-8 animate-in fade-in-0 slide-in-from-bottom-2 duration-500 px-2">
           {children}
         </div>
       </SidebarInset>

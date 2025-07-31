@@ -10,8 +10,10 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { getDashboardStats } from '@/actions/admin/dashboard-actions';
+import { checkPermission } from '@/lib/auth-helpers';
 
 export default async function AdminDashboard() {
+  await checkPermission()
   const statsResult = await getDashboardStats();
   const stats = statsResult.success ? statsResult.data : {
     totalMenuItems: 0,

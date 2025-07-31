@@ -1,8 +1,10 @@
 import MessagesClient from './messages';
 import { MessageStats } from '@/components/admin/messages/message-stats';
 import { getMessages } from '@/actions/admin/message-actions';
+import { checkPermission } from '@/lib/auth-helpers';
 
 export default async function MessagesPage() {
+  await checkPermission();
   const messagesResult = await getMessages({ page: 1, limit: 10, filter: 'all', dateFilter: '' });
   const messages = messagesResult.data?.success && messagesResult.data.data ? 
     messagesResult.data.data.messages.map(msg => ({

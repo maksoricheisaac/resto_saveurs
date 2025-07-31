@@ -1,8 +1,10 @@
 import { getMenuCategories, getMenuItems } from '@/actions/admin/menu-action'
 import { transformPrismaMenuItem, transformPrismaCategory } from '@/lib/utils'
 import AdminMenus from './menu'
+import { checkPermission } from '@/lib/auth-helpers';
 
 export default async function MenuPage() {
+  await checkPermission();
   const categoriesResult = await getMenuCategories()
   const menusResult = await getMenuItems({ page: 1, limit: 10 })
 
