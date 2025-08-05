@@ -19,6 +19,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
+import { signOut } from "@/lib/auth-client";
 
 // Données de navigation admin avec icônes lucide-react
 const data = {
@@ -138,7 +139,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu className="space-y-2">
          
           <SidebarMenuItem>
-            <SidebarMenuButton className="font-medium gap-3 h-11 rounded-lg px-3 flex items-center hover:bg-red-50 hover:text-red-700 text-gray-600 transition-all duration-200">
+            <SidebarMenuButton
+              onClick={async() => {
+                await signOut()
+              }}
+              className="font-medium gap-3 h-11 rounded-lg px-3 flex items-center hover:bg-red-50 hover:text-red-700 text-gray-600 transition-all duration-200">
               <LogOut
                 className="text-gray-400 group-hover/menu-button:text-red-600 transition-colors duration-200"
                 size={20}
